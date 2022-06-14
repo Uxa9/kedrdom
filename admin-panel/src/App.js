@@ -10,20 +10,35 @@ import PageTemplate from './components/common/pageTemplate';
 import HomePage from './components/pages/homePage';
 
 import { AuthProvider } from './components/auth/AuthProvider';
+import { HeaderProvider } from './components/common/HeaderProvider';
+import TypesPage from './components/pages/typesPage';
+import TypePage from './components/pages/typePage';
 
 function App() {
   return (
     <AuthProvider>
-      <Routes>
-        <Route path='/' element={<PageTemplate />}>
-          <Route path='auth' element={<LoginPage />}/>
-          <Route index element={
-            <RequiredAuth>
-              <HomePage />
-            </RequiredAuth>
-          } />
-        </Route>
-      </Routes>
+      <HeaderProvider>
+        <Routes>
+            <Route path='/' element={<PageTemplate />}>
+              <Route path='auth' element={<LoginPage />}/>
+              <Route index element={
+                <RequiredAuth>
+                  <HomePage />
+                </RequiredAuth>
+              } />
+              <Route path='goods' element={
+                <RequiredAuth>
+                  <TypesPage />
+                </RequiredAuth>
+              } />
+              <Route path='goods/:id' element={
+                  <RequiredAuth>
+                    <TypePage />
+                  </RequiredAuth>
+              } />
+            </Route>
+        </Routes>
+      </HeaderProvider>
     </AuthProvider>
   );
 }
