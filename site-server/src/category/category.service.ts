@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -9,9 +9,15 @@ export class CategoryService {
     constructor (@InjectModel(Category.name) private categoryModel: Model<CategoryDocumnet>) {}
     
     async create(dto: CreateCategoryDto): Promise<Category> {
-        const cat = await this.categoryModel.create({ ...dto, show: false });
-
-        return cat;
+        try {
+            const cat = await this.categoryModel.create({ ...dto, show: false });
+            
+            return cat;
+        } catch (error) {
+            throw new HttpException({
+                error: "CREATION_FAILED"
+            }, HttpStatus.BAD_REQUEST)   
+        }
     }
 
     async getAll(): Promise<Category[]> {
@@ -21,9 +27,15 @@ export class CategoryService {
     }
 
     async getById(id: ObjectId): Promise<Category> {
-        const cat = await this.categoryModel.findById(id);
-
-        return cat;
+        try {
+            const cat = await this.categoryModel.findById(id);
+            
+            return cat;
+        } catch (error) {
+            throw new HttpException({
+                error: "ID_NOT_FOUND"
+            }, HttpStatus.NOT_FOUND)   
+        }
     }
 
     async delete(id: ObjectId): Promise<any> {
