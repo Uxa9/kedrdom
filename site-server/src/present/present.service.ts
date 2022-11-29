@@ -4,16 +4,21 @@ import {Model, ObjectId} from "mongoose";
 import {Present, PresentDocument} from "./schemas/present.schema";
 import {Category} from "../category/schemas/category.schema";
 import {EditCategoryDto} from "../category/dto/edit-category.dto";
+import { FilesService, FileType } from '../files/files.service';
+import { CreatePresentDto } from './dto/create-present.dto';
 
 @Injectable()
 export class PresentService {
     constructor(
-        @InjectModel(Present.name) private presentModel: Model<PresentDocument>
+        @InjectModel(Present.name) private presentModel: Model<PresentDocument>,
+        private fileService : FilesService
     ) {}
 
-    async create(dto: any): Promise<Present> {
+    async create(dto: CreatePresentDto, files): Promise<Present> {
+        const fileNames = this.fileService.createFiles(FileType.IMAGE, files);
+        
         try {
-            return this.presentModel.create({ ...dto, show: false });
+            return await this.presentModel.create({ ...dto, show: false, photos: fileNames });
         }
         catch(e) {
             throw new HttpException({

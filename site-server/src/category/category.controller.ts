@@ -1,4 +1,4 @@
-import { Body, Controller, Put, Get, Post, Delete, Param } from '@nestjs/common';
+import { Body, Controller, Put, Get, Post, Delete, Param, Query } from '@nestjs/common';
 import { ObjectId } from 'mongoose';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
@@ -14,8 +14,8 @@ export class CategoryController {
     }
 
     @Get()
-    getAll() {
-        return this.categoryService.getAll();
+    getAll(@Query() query: Object) {
+        return this.categoryService.getAll(query);
     }
 
     @Post()

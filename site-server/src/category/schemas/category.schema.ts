@@ -16,6 +16,9 @@ export class Category {
 
     @Prop()
     show: boolean;    
+
+    @Prop()
+    type: string;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);

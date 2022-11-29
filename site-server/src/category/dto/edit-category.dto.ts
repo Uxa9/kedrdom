@@ -1,5 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export class EditCategoryDto {
-    readonly _id;
-    readonly name;
-    readonly upCategory;
+    readonly _id : ObjectId;
+    readonly name : string;
+    readonly upCategory : string;
 }

@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+}
+
+.ant-layout-sider { 
+    min-width: 300px !important;
+}
+
+.ant-layout-sider-zero-width {
+    min-width: 0 !important;
+}

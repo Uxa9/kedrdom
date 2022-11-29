@@ -11,7 +11,7 @@ export class CategoryService {
     
     async create(dto: CreateCategoryDto): Promise<Category> {
         try {
-            return this.categoryModel.create({ ...dto, show: false });
+            return this.categoryModel.create({ upCategory: "", ...dto, show: true });
         }
         catch(e) {
             throw new HttpException({
@@ -20,9 +20,9 @@ export class CategoryService {
         }
     }
 
-    async getAll(): Promise<Category[]> {
+    async getAll(params: Object): Promise<Category[]> {
         try {
-            return this.categoryModel.find();
+            return this.categoryModel.find(params)
         }
         catch(e) {
             throw new HttpException({

@@ -21,7 +21,7 @@ export class Product {
     @Prop([String])
     compound: string[];
 
-    @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'Variants' }})
+    @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'PFC' }})
     pfc: PFC;
 
     @Prop([String])
@@ -35,6 +35,9 @@ export class Product {
 
     @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Variants' }]})
     variants: Variants[];
+
+    @Prop()
+    categoryId: mongoose.ObjectId;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Product);
