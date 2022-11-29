@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
-export type PresentDocumnet = Present & Document;
+export type PresentDocument = Present & Document;
 
 @Schema()
 export class Present {
@@ -13,7 +13,7 @@ export class Present {
     brief: string;
 
     @Prop()
-    price: number;    
+    price: number;
     
     @Prop()
     description: string;
@@ -23,6 +23,9 @@ export class Present {
 
     @Prop()
     categoryId: string;
+
+    @Prop([String])
+    photos: string[];
 
     @Prop()
     show: boolean;

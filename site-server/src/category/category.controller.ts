@@ -2,6 +2,7 @@ import { Body, Controller, Put, Get, Post, Delete, Param } from '@nestjs/common'
 import { ObjectId } from 'mongoose';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { EditCategoryDto } from './dto/edit-category.dto';
 
 @Controller('category')
 export class CategoryController {
@@ -15,6 +16,11 @@ export class CategoryController {
     @Get()
     getAll() {
         return this.categoryService.getAll();
+    }
+
+    @Post()
+    update(@Body() dto: EditCategoryDto) {
+        return this.categoryService.update(dto);
     }
 
     @Get(':id')

@@ -1,34 +1,70 @@
-import { Injectable } from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { Category, CategoryDocumnet } from './schemas/category.schema';
+import { EditCategoryDto } from './dto/edit-category.dto';
+import { Category, CategoryDocument } from './schemas/category.schema';
 
 @Injectable()
 export class CategoryService {
-    constructor (@InjectModel(Category.name) private categoryModel: Model<CategoryDocumnet>) {}
+    constructor (@InjectModel(Category.name) private categoryModel: Model<CategoryDocument>) {}
     
     async create(dto: CreateCategoryDto): Promise<Category> {
-        const cat = await this.categoryModel.create({ ...dto, show: false });
-
-        return cat;
+        try {
+            return this.categoryModel.create({ ...dto, show: false });
+        }
+        catch(e) {
+            throw new HttpException({
+                status: "not created"
+            }, HttpStatus.BAD_REQUEST);
+        }
     }
 
     async getAll(): Promise<Category[]> {
-        const cats = await this.categoryModel.find();
-
-        return cats;
+        try {
+            return this.categoryModel.find();
+        }
+        catch(e) {
+            throw new HttpException({
+                status: "not found"
+            }, HttpStatus.NOT_FOUND);
+        }
     }
 
     async getById(id: ObjectId): Promise<Category> {
-        const cat = await this.categoryModel.findById(id);
+        try {
+            return this.categoryModel.findById(id);
+        }
+        catch(e) {
+            throw new HttpException({
+                status: "not found"
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
 
-        return cat;
+    async update(dto: EditCategoryDto): Promise<any> {
+        try {
+            await this.categoryModel.findByIdAndUpdate(dto._id, dto);
+
+            return { status: "updated" }
+        }
+        catch(e) {
+            throw new HttpException({
+                status: "error"
+            }, HttpStatus.BAD_REQUEST);
+        }
     }
 
     async delete(id: ObjectId): Promise<any> {
-        await this.categoryModel.deleteOne({ _id: id });
+        try {
+            await this.categoryModel.deleteOne({ _id : id });
 
-        return { status: "ok" };
+            return { status: "deleted" }
+        }
+        catch(e) {
+            throw new HttpException({
+                status: "error"
+            }, HttpStatus.BAD_GATEWAY);
+        }
     }
 }
