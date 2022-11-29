@@ -29,6 +29,10 @@ export class Present {
 
     @Prop()
     show: boolean;
+
+    @Prop()
+    photos: string[];
+
 }
 
 export const PresentSchema = SchemaFactory.createForClass(Present);

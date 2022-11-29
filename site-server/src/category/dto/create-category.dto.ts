@@ -1,4 +1,4 @@
 export class CreateCategoryDto {
-    readonly name;
-    readonly upCategory;
+    readonly name: string;
+    readonly upCategory: string;
 }
