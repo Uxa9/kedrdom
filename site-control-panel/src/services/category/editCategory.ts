@@ -1,8 +1,8 @@
 import { api } from "../../hooks/useApi";
 
-export const getByCat = async (id: any) => {
+export const update = async (params: Object) => {
     
-    const result = await api.get(`product/category/${id}`);
+    const result = await api.post(`category`, params);
     
     if ( result.status === 200) {
         return result.data;

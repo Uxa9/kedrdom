@@ -9,3 +9,13 @@ body {
 .ant-layout-sider-zero-width {
     min-width: 0 !important;
 }
+
+.ant-layout-sider-children {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ant-layout-sider {
+    min-height: 100vh !important;
+}

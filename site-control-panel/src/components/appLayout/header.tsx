@@ -13,6 +13,10 @@ const navMenu: MenuProps['items'] = [
         key: 'present',
         label: 'Подарки'
     },
+    {
+        key: 'category',
+        label: "Категории"
+    }
 ];
 
 const HeaderMenu = () => {

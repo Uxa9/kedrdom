@@ -4,7 +4,7 @@ import * as mongoose from "mongoose";
 import { PFC } from "./pfc.schema";
 import { Variants } from "./variants.schema";
 
-export type ProductDocumnet = Product & Document;
+export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product {
@@ -37,7 +37,10 @@ export class Product {
     variants: Variants[];
 
     @Prop()
-    categoryId: mongoose.ObjectId;
+    show: boolean;
+
+    @Prop()
+    categoryId: string;
 }
 
-export const CategorySchema = SchemaFactory.createForClass(Product);
+export const ProductShema = SchemaFactory.createForClass(Product);

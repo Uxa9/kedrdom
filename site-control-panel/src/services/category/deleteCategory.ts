@@ -1,8 +1,8 @@
 import { api } from "../../hooks/useApi";
 
-export const getByCat = async (id: any) => {
+export const deleteCat = async (id: string) => {
     
-    const result = await api.get(`product/category/${id}`);
+    const result = await api.delete(`category/${id}`);
     
     if ( result.status === 200) {
         return result.data;

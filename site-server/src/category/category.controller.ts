@@ -28,6 +28,11 @@ export class CategoryController {
         return this.categoryService.getById(id);
     }
 
+    @Get('all/:id')
+    getAllNestedById(@Param('id') id: ObjectId) {
+        return this.categoryService.getAllNestedById(id);
+    }
+
     @Delete(':id')
     delete(@Param('id') id: ObjectId) {
         return this.categoryService.delete(id);

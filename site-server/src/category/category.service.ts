@@ -20,7 +20,7 @@ export class CategoryService {
         }
     }
 
-    async getAll(params: Object): Promise<Category[]> {
+    async getAll(params: Object): Promise<CategoryDocument[]> {
         try {
             return this.categoryModel.find(params)
         }
@@ -42,7 +42,34 @@ export class CategoryService {
         }
     }
 
+    async getAllNestedById(id: ObjectId): Promise<CategoryDocument[]> {
+        const arr = [];
+
+        const getAllNested = async (id: ObjectId) => {
+            
+            const cat = await this.getById(id);
+
+            arr.push(cat);
+
+            const childs = await this.getAll({upCategory: id});
+            
+            await Promise.all(childs.map(child => getAllNested(child._id)));
+        }
+
+        try {
+            await getAllNested(id);
+        } catch (e) {
+            throw new HttpException({
+                status: "error at request"
+            }, HttpStatus.BAD_REQUEST);
+        }
+        
+        return arr;
+    }
+
     async update(dto: EditCategoryDto): Promise<any> {
+        console.log(dto);
+        
         try {
             await this.categoryModel.findByIdAndUpdate(dto._id, dto);
 

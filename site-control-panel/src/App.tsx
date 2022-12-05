@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Products from './components/product';
 import path from 'path';
+import Categories from './components/category';
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "present",
                 element: <div>pres</div>
+            },
+            {
+                path: "category",
+                element: <Categories />
             }
         ]
     }

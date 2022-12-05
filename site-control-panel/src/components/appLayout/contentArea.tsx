@@ -12,7 +12,7 @@ const ContentArea = () => {
                 className="site-layout-background" 
                 style={{ 
                     padding: 24, 
-                    height: "calc(100vh - 131px)",
+                    minHeight: "calc(100vh - 131px)",
                     boxSizing: "border-box"
                 }}>
                 <Outlet />
