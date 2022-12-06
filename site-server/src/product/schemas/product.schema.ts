@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import * as mongoose from "mongoose";
-import { PFC } from "./pfc.schema";
-import { Variants } from "./variants.schema";
+import { PFC, PfcSchema } from "./pfc.schema";
+import { Variants, VariantsSchema } from "./variants.schema";
 
 export type ProductDocument = Product & Document;
 
@@ -19,9 +19,9 @@ export class Product {
     description: string;
 
     @Prop([String])
-    compound: string[];
+    compound: string;
 
-    @Prop({ type: { type: mongoose.Schema.Types.ObjectId, ref: 'PFC' }})
+    @Prop({ type: PfcSchema })
     pfc: PFC;
 
     @Prop([String])
@@ -33,7 +33,7 @@ export class Product {
     @Prop()
     storageCondition: string;
 
-    @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Variants' }]})
+    @Prop({ type: [VariantsSchema]})
     variants: Variants[];
 
     @Prop()

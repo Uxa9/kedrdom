@@ -15,11 +15,10 @@ export class FilesService {
 
     createFiles(type: FileType, files): string[] {
         try {
-
             const names = files.map(file => {
                 // const fileExtension = file.originalname.split('.').pop();
                 const fileName = uuid.v4() + '.' + 'png';
-                const filePath = path.resolve(__dirname, '..', 'static', type)
+                const filePath = path.resolve(__dirname, '..', 'static/files', type)
 
                 if (!fs.existsSync(filePath)) {
                     fs.mkdirSync(filePath, { recursive: true });
@@ -35,7 +34,7 @@ export class FilesService {
                         fs.writeFileSync(path.resolve(filePath, fileName), buffer);
                     });
 
-                return type + '/' + fileName;
+                return 'files/' + type + '/' + fileName;
             });
 
             return names;

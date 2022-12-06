@@ -7,5 +7,5 @@ export {
     getAll,
     add,
     deleteCat,
-    update
+    update,
 }

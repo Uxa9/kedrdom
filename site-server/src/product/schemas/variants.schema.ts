@@ -16,7 +16,8 @@ export class Variants {
     available: boolean;
 
     @Prop()
-    supplyDate: string
+    supplyDate: string;
+
 }
 
-export const CategorySchema = SchemaFactory.createForClass(Variants);
+export const VariantsSchema = SchemaFactory.createForClass(Variants);

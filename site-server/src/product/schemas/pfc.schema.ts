@@ -14,6 +14,7 @@ export class PFC {
     
     @Prop()
     carbohydrates: number;
+
 }
 
-export const CategorySchema = SchemaFactory.createForClass(PFC);
+export const PfcSchema = SchemaFactory.createForClass(PFC);
