@@ -4,6 +4,7 @@ import { Model, ObjectId } from 'mongoose';
 import { CategoryService } from 'src/category/category.service';
 import { FilesService } from '../files/files.service';
 import { Product, ProductDocument } from './schemas/product.schema';
+import {CreateProductDto} from "./dto/create-product.dto";
 
 @Injectable()
 export class ProductService {
@@ -20,7 +21,16 @@ export class ProductService {
         const catsName = cats.map(cat => cat._id);
         
 
-        return await this.productModel.find({categoryId: { $in: catsName }});
+        return this.productModel.find({categoryId: { $in: catsName }});
+    }
+
+    async create(dto: CreateProductDto): Promise<Product> {
+
+        console.log(dto);
+
+        await this.productModel.create(dto);
+
+        return
     }
 
 }

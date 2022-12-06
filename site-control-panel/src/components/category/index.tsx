@@ -2,7 +2,6 @@ import { Button, Card, Checkbox, Col, Divider, Form, Input, List, Modal, Popconf
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { getByCat } from "../../services/product/getByCat";
 import { add, deleteCat, getAll, update } from "../../services/category";
 
 const { Item } = Form;

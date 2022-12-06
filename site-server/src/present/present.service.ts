@@ -21,8 +21,6 @@ export class PresentService {
             return await this.presentModel.create({ ...dto, show: false, photos: fileNames });
         }
         catch(e) {
-            console.log(e);
-            
             throw new HttpException({
                 status: "not created"
             }, HttpStatus.BAD_REQUEST);

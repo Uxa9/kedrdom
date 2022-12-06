@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors} from '@nestjs/common';
 import { ObjectId } from 'mongoose';
 import { CategoryService } from '../category/category.service';
 import { CreateCategoryDto } from '../category/dto/create-category.dto';
 import { EditCategoryDto } from '../category/dto/edit-category.dto';
 import { ProductService } from './product.service';
+import {CreateProductDto} from "./dto/create-product.dto";
+import {FilesInterceptor} from "@nestjs/platform-express";
 
 @Controller('product')
 export class ProductController {
@@ -13,8 +15,9 @@ export class ProductController {
     ) {}
 
     @Put()
-    create(@Body() dto: CreateCategoryDto) {
-        return this.categoryService.create(dto);
+    @UseInterceptors(FilesInterceptor('photos'))
+    create(@Body() dto: CreateProductDto) {
+        return this.productService.create(dto);
     }
 
     @Get()
