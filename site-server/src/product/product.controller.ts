@@ -37,6 +37,11 @@ export class ProductController {
         return this.productService.uploadPhoto(id, photos);
     }
 
+    @Get('photos/:id')
+    getPhotosById(@Param('id') id: ObjectId) {
+        return this.productService.getById(id);
+    }
+
     // @Get(':id')
     // getById(@Param('id') id: ObjectId) {
     //     return this.categoryService.getById(id);

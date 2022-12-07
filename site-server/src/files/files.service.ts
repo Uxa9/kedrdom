@@ -28,7 +28,8 @@ export class FilesService {
                     .resize(1028, 1028, {
                         fit: 'cover',
                     })
-                    .png()
+                    .png({ compressionLevel: 9, adaptiveFiltering: true, force: true })
+                    .withMetadata()
                     .toBuffer()
                     .then(buffer => {
                         fs.writeFileSync(path.resolve(filePath, fileName), buffer);

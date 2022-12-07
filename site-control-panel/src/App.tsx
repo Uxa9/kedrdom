@@ -8,8 +8,8 @@ import {
     Route 
 } from 'react-router-dom';
 import Products from './components/product';
-import path from 'path';
 import Categories from './components/category';
+import Present from './components/present';
 
 const router = createBrowserRouter([
     {
@@ -28,7 +28,13 @@ const router = createBrowserRouter([
             },
             {
                 path: "present",
-                element: <div>pres</div>
+                element: <Present />,
+                children: [
+                    {
+                        path: ":id",
+                        element: <Present />
+                    }
+                ]
             },
             {
                 path: "category",

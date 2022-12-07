@@ -14,17 +14,25 @@ export class PresentService {
         private fileService : FilesService
     ) {}
 
-    async create(dto: CreatePresentDto, files): Promise<Present> {
-        const fileNames = this.fileService.createFiles(FileType.IMAGE, files);
-        
+    async create(dto: CreatePresentDto): Promise<Present> {
         try {
-            return await this.presentModel.create({ ...dto, show: false, photos: fileNames });
+            return await this.presentModel.create({ ...dto, photos: [] });
         }
         catch(e) {
             throw new HttpException({
                 status: "not created"
             }, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    async uploadPhoto(id: ObjectId, files): Promise<string> {        
+        const fileNames = this.fileService.createFiles(FileType.PRODUCT, files);
+        
+        await this.presentModel.findByIdAndUpdate(id, {
+            $push: {"photos": fileNames }
+        });
+
+        return fileNames[0];
     }
 
     async getAll(): Promise<Category[]> {

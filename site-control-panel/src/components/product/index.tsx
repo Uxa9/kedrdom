@@ -55,9 +55,11 @@ const Products = () => {
     const [editForm] = Form.useForm();
 
     useEffect(() => {
-        getByCat(id).then(res => {
-            setProducts(res);
-        });
+        if (id !== null) {
+            getByCat(id).then(res => {
+                setProducts(res);
+            });
+        }
     }, [id]);
 
     useEffect(() => {
@@ -69,11 +71,13 @@ const Products = () => {
         }
     }, [current]);
 
-    useEffect(() => {
-        getProduct(productId)
-            .then(res => {
-                setProductVars(res.variants);
-            });
+    useEffect(() => {        
+        if (productId !== "") {
+            getProduct(productId)
+                .then(res => {
+                    setProductVars(res.variants);
+                });
+        }
     }, [productId])
 
     const firstStep = () => {
@@ -192,7 +196,7 @@ const Products = () => {
         const props: UploadProps = {
             name: 'photos',
             multiple: true,
-            action: `http://localhost:5000/product/uploadPhoto/${productId}`,
+            action: `http://95.163.242.54:5000/product/uploadPhoto/${productId}`,
             listType: "picture",
             className: "upload-list-inline"
         };
@@ -390,11 +394,7 @@ const Products = () => {
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
     const handleChange: UploadProps['onChange'] = ({ file, fileList: newFileList }) => {
-        console.log(file);
-        console.log(newFileList);
-        console.log(file.response);
-
-
+        // check multiple upload
         const index = newFileList.findIndex(item => item.uid === file.uid);
 
         if (index !== -1 && file.response !== undefined) {
@@ -435,7 +435,7 @@ const Products = () => {
                                 cover={
                                     <img
                                         alt="example"
-                                        src={`http://localhost:5000/${product.photos[0]}` || "http://localhost:5000/product/test.jpg"}
+                                        src={`http://95.163.242.54:5000/${product.photos[0]}` || "http://95.163.242.54:5000/product/test.jpg"}
                                     />
                                 }
                                 actions={[
@@ -455,7 +455,7 @@ const Products = () => {
                                                     uid: index.toString(),
                                                     name: item,
                                                     status: 'done',
-                                                    url: `http://localhost:5000/${product.photos[index]}` || "http://localhost:5000/product/test.jpg"
+                                                    url: `http://95.163.242.54:5000/${product.photos[index]}` || "http://95.163.242.54:5000/product/test.jpg"
                                                 }
                                             }))
                                         }}
@@ -670,7 +670,7 @@ const Products = () => {
                     <span>Фотографии</span>
                     <Upload
                         name="photos"
-                        action={`http://localhost:5000/product/uploadPhoto/${productId}`}
+                        action={`http://95.163.242.54:5000/product/uploadPhoto/${productId}`}
                         listType="picture-card"
                         fileList={fileList}
                         multiple={true}

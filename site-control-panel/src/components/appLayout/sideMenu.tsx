@@ -83,7 +83,7 @@ const SideMenu = () => {
                         theme="dark"
                         mode="inline"
                         items={parseMenuItems(categories)}
-                        onClick={(e) => navigate(`product/${e.key}`)}
+                        onClick={(e) => navigate(`${location.pathname.split('/')[1]}/${e.key}`)}
                     />
                 </div>
                 <Button

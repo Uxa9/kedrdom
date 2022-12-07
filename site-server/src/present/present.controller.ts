@@ -12,9 +12,19 @@ export class PresentController {
     constructor(private presentService: PresentService) { }
 
     @Put()
-    @UseInterceptors(FilesInterceptor('files'))
-    createPresent(@UploadedFiles() files: Array<Express.Multer.File>, @Body() dto: CreatePresentDto) {
-        return this.presentService.create(dto, files);
+    createPresent(@Body() dto: CreatePresentDto) {
+        return this.presentService.create(dto);
+    }
+
+    @Post('uploadPhoto/:id')
+    @UseInterceptors(FilesInterceptor('photos'))
+    uploadPhoto(@UploadedFiles() photos: Array<Express.Multer.File>, @Param('id') id: ObjectId) {
+        return this.presentService.uploadPhoto(id, photos);
+    }
+
+    @Get('photos/:id')
+    getPhotosById(@Param('id') id: ObjectId) {
+        return this.presentService.getById(id);
     }
 
     @Get()
