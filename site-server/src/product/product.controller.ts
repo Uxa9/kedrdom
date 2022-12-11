@@ -21,6 +21,11 @@ export class ProductController {
         return this.productService.create(dto);
     }
 
+    @Get()
+    getAll() {
+        return this.productService.getAll();
+    }
+
     @Get('/:id')
     getById(@Param('id') id: ObjectId) {
         return this.productService.getById(id);

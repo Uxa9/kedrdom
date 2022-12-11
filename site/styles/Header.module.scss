@@ -1,0 +1,109 @@
+@import './variables.scss';
+
+.header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: 5px;
+    border-bottom: 2px solid $brown;
+
+    >* {
+        flex-grow: 1;
+    }
+    
+    .burger-button {
+        cursor: pointer;
+        display: none;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo {
+        width: 90px;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .links {
+        display: flex;
+        justify-content: flex-end;
+        
+        >a {
+            padding-left: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .header {
+        justify-content: center;
+        
+        >span,
+        .links {
+            display: none;
+        }
+
+        .burger-button {
+            display: flex;
+        }
+
+        >* {
+            flex-grow: unset;
+        }
+    }
+
+    .enable-menu {
+        justify-content: space-between;
+    }
+}
+
+.burger-stripes {
+    display: flex;
+
+    width: 30px;
+    height: 4px;
+    background-color: $brown;
+
+    position: relative;
+    top: 18px;
+    left: 5px;
+    transition: all .3s;
+
+    &::after,
+    &::before {
+        display: block;
+        content: "";
+        width: 30px;
+        height: 4px;
+        background-color: $brown;
+
+        position: absolute;
+
+        transition: all .3s;
+    }
+
+    &::after {
+        top: -10px;
+        left: 0;
+    }
+
+    &::before {
+        bottom: -10px;
+    }
+}
+
+.burger-button-active {
+    .burger-stripes {
+        width: 0;
+
+        &::after {
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        &::before {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+    }
+}

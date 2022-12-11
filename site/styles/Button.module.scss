@@ -1,0 +1,16 @@
+@import './variables.scss';
+
+.button {
+    padding: 7px 50px;
+    width: fit-content;
+    height: fit-content;
+    border: 1.3px solid $black;
+    font-weight: bold !important;
+    cursor: pointer;
+
+    background-color: $bg-primary;
+
+    @include linkStyles();
+
+    transition: filter .5s;
+}

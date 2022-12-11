@@ -559,6 +559,11 @@ const Products = () => {
                         .then(values => {
                             updateProduct({
                                 _id: productId,
+                                pfc: {
+                                    fats: values.fats,
+                                    carbohydrates: values.carbohydrates,
+                                    proteins: values.proteins
+                                },
                                 ...values,
                                 photos: fileList.map(item => item.name)
                             })

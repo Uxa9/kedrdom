@@ -1,0 +1,19 @@
+$bg-color: #FBF7F3;
+$brown: #500D00;
+$bg-primary: rgba(170, 134, 114, 0.46);
+$bg-dark: #AA8672;
+$black: #000;
+$light-gray: #FFFDFD;
+
+@mixin linkStyles {
+
+    transition: filter .5s;
+    
+    &:hover {
+        filter: brightness(1.2);
+    }
+
+    &:active {
+        filter: brightness(0.8);
+    }
+}

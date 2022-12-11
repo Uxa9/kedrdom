@@ -1,0 +1,47 @@
+@import './variables.scss';
+
+.main-wrapper {
+    background-color: $bg-color;
+
+    // min-width: 100vw;
+    min-height: 100vh;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: center;
+    
+    // навалил кринжа
+    aside {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.content-main-wrapper {
+    flex-grow: 1;
+
+    position: relative;
+}
+
+@media screen and (max-width: 680px) {
+
+    .content-wrapper {
+        width: 100%;
+    }
+
+    .mobile-menu-active {
+        aside {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+    }
+}

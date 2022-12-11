@@ -1,0 +1,32 @@
+@import './variables.scss';
+
+.menu {
+    position: absolute;
+    height: calc(100% + 19px);
+    width: 300px;
+    padding: 40px 20px 60px;
+    left: 0;
+
+    transform: translateX(0);
+    opacity: 1;
+
+    transition: transform .5s, opacity .3s;
+
+    background-color: $bg-dark;
+
+    ul {
+        list-style: none;
+        margin: 0;
+
+        padding-left: 5px;
+    }
+
+    li {
+        margin: 3px 0;
+    }
+}
+
+.menu-hidden {
+    transform: translateX(-100px);
+    opacity: 0;
+}

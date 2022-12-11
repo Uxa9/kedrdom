@@ -1,0 +1,716 @@
+@import './variables.scss';
+
+.index-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    section {
+        width: 100%;
+    }
+}
+
+
+.welcome-section {
+    display: flex;
+    justify-content: space-around;
+
+    .welcome-section-images {
+        width: 470px;
+        margin-top: 24px;
+        display: flex;
+        align-items: flex-end;
+        position: relative;
+
+        .image-container {
+
+            border-radius: 30px;
+            position: relative;
+
+            width: max-content;
+            height: max-content;
+
+            .background {
+                border-radius: 30px;
+                width: 100%;
+                height: 100%;
+                background: $bg-primary;
+                position: absolute;
+
+                z-index: 1;
+            }
+
+            &:first-child {
+                width: 310px;
+                height: 460px;
+
+                img {
+                    top: 26px;
+                    left: 40px;
+
+                    z-index: 2;
+                }
+            }
+
+            &:last-child {
+                width: 200px;
+                height: 305px;
+
+                top: 60px;
+                left: -35px;
+
+                img {
+
+                    z-index: 3;
+                }
+
+                .background {
+                    top: 0;
+                    left: -30px;
+                }
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+
+                border: 2px solid $brown;
+                border-radius: 30px;
+
+                position: relative;
+
+                object-fit: cover;
+            }
+
+        }
+    }
+
+    main {
+        h1 {
+            text-decoration: underline;
+            color: $brown;
+            font-style: normal;
+            margin: 80px 0 40px;
+        }
+
+        p {
+            max-width: 420px;
+        }
+    }
+
+    .links {
+        display: flex;
+
+        margin-bottom: 50px;
+
+        a {
+            display: block;
+            width: 36px;
+            height: 32px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.our-workshop-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin-top: 110px;
+
+    h2 {
+        color: $brown;
+    }
+
+    .our-workshop-section-content {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+
+        margin-top: 40px;
+
+        p {
+            max-width: 420px;
+
+            &:first-child {
+                margin-bottom: 35px;
+            }
+        }
+
+        .image-container {
+            width: 300px;
+            height: 390px;
+
+            position: relative;
+
+            &::before {
+                display: block;
+                content: "";
+
+                width: 100%;
+                height: 100%;
+
+                background-color: $bg-dark;
+                border-radius: 15px;
+
+                position: relative;
+                z-index: 1;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 15px;
+
+                position: absolute;
+                top: 45px;
+                right: 55px;
+                z-index: 2;
+            }
+        }
+
+        main {
+            margin: 0 80px 80px 0;
+        }
+
+        .open-oil-link {
+            display: flex;
+            align-items: center;
+
+            width: fit-content;
+            padding-right: 3px;
+
+            margin-top: 85px;
+            border-bottom: 2px solid $brown;
+
+            &:hover {
+                .arrow {
+                    transform: translateX(10px);
+                }
+            }
+
+            .arrow {
+                width: 70px;
+                height: 2px;
+                margin-left: 5px;
+
+                background-color: $brown;
+                border-radius: 1px;
+
+                position: relative;
+
+                transition: transform .5s;
+
+                &::before,
+                &::after {
+                    display: block;
+                    content: "";
+
+                    width: 8px;
+                    height: 2px;
+
+                    background-color: $brown;
+                    border-radius: 1px;
+
+                    position: absolute;
+                    right: -2px;
+
+                    transform-origin: 100% 50%;
+                }
+
+                &::before {
+                    top: 0.5px;
+                    transform: rotate(45deg);
+                }
+
+                &::after {
+                    bottom: 0.5px;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+    }
+
+}
+
+.icons-section {
+    display: flex;
+    justify-content: space-around;
+
+    margin: 90px 0 50px;
+
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        >div {
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+            background: $bg-dark;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                width: auto;
+                height: 110%;
+                transform: translateX(50%);
+            }
+        }
+
+        span {
+            display: block;
+            width: 150px;
+            text-align: center;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+
+        // мда, костыльки
+        &:nth-child(3) {
+            >div img {
+                transform: translateY(10px) translateX(50%);
+            }
+
+        }
+
+        &:nth-child(4) {
+            >div img {
+                transform: translateX(40%);
+            }
+
+        }
+    }
+}
+
+.catalog-navigation {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    margin-top: 30px;
+    width: 100%;
+
+    main {
+        width: 100%;
+        margin: 50px 0;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        gap: 3vw;
+
+        .catalog-element {
+            display: flex;
+            align-items: flex-end;
+
+            max-width: 450px;
+            width: 100%;
+            // height: 285px;
+            aspect-ratio: 500 / 285;
+
+            background-position: center;
+            background-size: 100%;
+
+            position: relative;
+
+            span {
+                position: absolute;
+                font-size: 36px;
+                line-height: 42px;
+
+                color: $light-gray;
+                left: 27px;
+                bottom: 20px;
+            }
+
+            &:nth-child(1) {
+                border-radius: 60px 0 0 0;
+                background-image: url('/jam.webp');
+
+                &::before {
+                    border-radius: 60px 0 0 0;
+                }
+            }
+
+            &:nth-child(2) {
+                border-radius: 0 60px 0 0;
+                background-image: url('/honey.jpg');
+
+                &::before {
+                    border-radius: 0 60px 0 0;
+                }
+            }
+
+            &:nth-child(3) {
+                background-image: url('/tea.webp');
+            }
+
+            &:nth-child(4) {
+                background-image: url('/oil.jpg');
+            }
+
+            &:nth-child(5) {
+                border-radius: 0 0 0 60px;
+                background-image: url('/sweets.webp');
+
+                &::before {
+                    border-radius: 0 0 0 60px;
+                }
+            }
+
+            &:nth-child(6) {
+                border-radius: 0 0 60px 0;
+                background-image: url('/meat.webp');
+
+                &::before {
+                    border-radius: 0 0 60px 0;
+                }
+            }
+
+            &:nth-child(2n+1) {
+                justify-self: flex-end;
+            }
+
+            &:nth-child(2n) {
+                justify-self: flex-start;
+            }
+
+            &::before {
+                display: block;
+                content: "";
+
+                width: 100%;
+                height: 100%;
+
+                background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+            }
+
+            transition: background-size .3s ease-in-out;
+            -moz-transition: background-size .3s ease-in-out;
+            -ms-transition: background-size .3s ease-in-out;
+            -o-transition: background-size .3s ease-in-out;
+            -webkit-transition: background-size .3s ease-in-out;
+
+            &:hover {
+                background-size: 120%;
+            }
+        }
+    }
+}
+
+// анальные забавы
+
+.carousel {
+    margin-top: 100px;
+
+    width: 950px !important;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .swiper-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 50px;
+
+        z-index: 9999;
+        cursor: pointer;
+
+        &::before,
+        &::after {
+            display: block;
+            content: "";
+            position: relative;
+            top: 42%;
+
+            width: 30px;
+            height: 3px;
+            border-radius: 2px;
+
+            background-color: $black;
+        }
+
+        &::after {
+            transform-origin: 0 50%;
+            transform: translateY(-2px) rotate(45deg);
+        }
+
+        &::before {
+            transform-origin: 0 50%;
+            transform: translateY(2px) rotate(-45deg);
+        }
+    }
+
+    .arrow-prev {
+        left: -30px;
+    }
+
+    .arrow-next {
+        transform: translateY(-50%) rotate(180deg);
+
+        right: -30px;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+    .carousel {
+        width: 800px !important;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .carousel {
+        width: 700px !important;
+    }
+
+    .arrow-prev {
+        left: -40px !important;
+    }
+
+    .arrow-next {
+        right: -40px !important;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .carousel {
+        width: 100% !important;
+    }
+}
+
+// 
+
+@media screen and (max-width: 770px) {
+    .welcome-section {
+        .welcome-section-images {
+            width: 400px;
+
+            .image-container {
+
+                &:first-child {
+                    width: 220px;
+                    height: 360px;
+
+                    img {
+                        top: 16px;
+                        left: 30px;
+
+                        z-index: 2;
+                    }
+                }
+
+                &:last-child {
+                    width: 150px;
+                    height: 220px;
+
+                    left: -35px;
+
+                    .background {
+                        left: -20px;
+                    }
+                }
+            }
+        }
+    }
+
+    .our-workshop-section {
+        .our-workshop-section-content {
+            .image-container {
+                width: 250px;
+                height: 340px;
+
+                img {
+                    top: 35px;
+                    right: 45px;
+                }
+            }
+        }
+
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .welcome-section {
+        flex-direction: column-reverse;
+        align-items: center;
+
+        main {
+            h1 {
+                text-align: center;
+                margin: 40px 0;
+                font-size: 28px;
+            }
+
+            .actions-wrapper {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: space-between;
+
+                >div:last-child {
+                    width: 100%;
+                    padding: 14px;
+                    margin: 18px 0;
+                    text-align: center;
+                }
+
+                .links {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+
+        .welcome-section-images {
+            width: 100%;
+
+            .image-container {
+                &:first-child {
+                    width: 80%;
+                }
+
+                &:last-child {
+                    position: absolute;
+
+                    left: auto;
+                    top: auto;
+                    right: 0;
+                    bottom: -50px;
+                }
+            }
+        }
+    }
+
+    .our-workshop-section {
+        margin-top: 100px;
+
+        h2 {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .our-workshop-section-content {
+            margin-top: 40px;
+
+            main {
+                margin: 0;
+
+                .open-oil-link {
+                    margin-top: 64px;
+                }
+            }
+
+        }
+
+
+        .image-container {
+            display: none;
+        }
+    }
+
+    .icons-section {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 30px;
+
+        >div {
+            >div {
+                width: 70px;
+                height: 70px;                
+            }
+
+            span {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .catalog-navigation {
+        h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        main {
+            // grid-template-columns: repeat(1, 1fr);
+            // row-gap: 30px;
+            margin: 40px 0;
+
+            .catalog-element {
+                height: 150px;
+                aspect-ratio: unset;
+
+                span {
+                    font-size: 24px;
+    
+                    color: $light-gray;
+                    left: 10px;
+                    bottom: 5px;
+                }
+
+                &:nth-child(1) {
+                    border-radius: 20px 0 0 0 !important;
+
+                    &::before {
+                        border-radius: 20px 0 0 0 !important;
+                    }
+                }
+
+                &:nth-child(2) {
+                    border-radius: 0 20px 0 0;
+
+                    &::before {
+                        border-radius: 0 20px 0 0;
+                    }
+                }
+
+                &:nth-child(5) {
+                    border-radius: 0 0 0 20px;
+
+                    &::before {
+                        border-radius: 0 0 0 20px;
+                    }
+                }
+
+                &:nth-child(6) {
+                    border-radius: 0 0 20px 0;
+
+                    &::before {
+                        border-radius: 0 0 20px 0;
+                    }
+                }
+            }
+        }
+
+        >div {
+            width: 100%;
+            padding: 14px;
+            text-align: center;
+        }
+    }
+
+    .carousel {
+        margin-top: 60px;
+
+        .swiper-arrow {
+            display: none;
+        }
+    }
+}
+

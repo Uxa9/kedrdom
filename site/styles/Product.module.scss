@@ -1,0 +1,59 @@
+@import './variables.scss';
+
+.product-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    main {
+        margin-top: 80px;
+
+        display: flex;
+
+        .slider-wrapper {
+            width: 55%;
+        }
+    }
+}
+
+.breadscrumbs {
+    background-color: $bg-primary;
+
+    padding: 30px 10px;
+
+    display: flex;
+    align-items: center;
+
+    >* {
+        display: flex;
+        align-items: center;
+    }
+
+    >*:not(:last-child) {
+
+        position: relative;
+        margin-right: 30px;
+
+        &::before,
+        &::after {
+            display: block;
+            content: "";
+            width: 8px;
+            height: 2px;
+
+            background-color: $brown;
+
+            position: absolute;
+            right: -18px;
+        }
+
+        &::before {
+            transform-origin: 100% 50%;
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            transform-origin: 100% 50%;
+            transform: rotate(-45deg);
+        }
+    }
+}

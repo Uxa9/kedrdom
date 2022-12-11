@@ -25,6 +25,12 @@ export class ProductService {
         return await this.productModel.findById(id);
     }
 
+    async getAll(): Promise<Product[]> {
+        return this.productModel.find({}, {}, {
+            limit: 30
+        })
+    }
+
     async getAllProducts(category: ObjectId): Promise<Product[]> {
 
         const cats = await this.categoryService.getAllNestedById(category);

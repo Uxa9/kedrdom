@@ -192,6 +192,7 @@ const Categories = () => {
                         <Select
                             showSearch
                             placeholder="Выберите категорию"
+                            allowClear
                             optionFilterProp="children"
                             onChange={() => { }}
                             filterOption={(input, option) =>
