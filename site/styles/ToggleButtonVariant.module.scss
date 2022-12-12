@@ -1,0 +1,51 @@
+@import './variables.scss';
+
+.variants-wrapper {
+    display: flex;
+}
+
+.variant {
+    cursor: pointer;
+    margin: 0 10px 0 0;
+    padding: 5px;
+
+    color: $brown;
+    border: 1px solid transparent;
+    transition: all .5s;
+
+    &:hover {
+        background-color: $bg-primary;
+    }
+}
+
+.active-variant {
+    border: 1px solid $black;
+    background-color: $bg-primary;
+}
+
+.variant-price {
+    margin-top: 100px;
+    color: $brown;
+
+    p:first-child {
+        font-size: 32px;
+        margin: 0;
+    }
+}
+
+.variant-unavailable {
+    p {
+        &:first-child {
+            text-decoration: line-through;
+        }
+
+        &:last-child {}
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .variant-price {
+        margin: 30px 0;
+    }
+}

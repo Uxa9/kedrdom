@@ -141,7 +141,7 @@ const Index = () => {
                                 что позволяет сохранить все самые полезные свойства и поделиться ими с вами!
                             </p>
                             <a
-                                href="/"
+                                href="catalog/6395bf41c6b13635e1886c8a"
                                 className={styles["open-oil-link"]}
                             >
                                 <span className={textFont.className}>

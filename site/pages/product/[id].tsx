@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import MainLayout from "../../layouts/MainLayout";
 
 import axios from "axios";
@@ -13,18 +13,57 @@ import 'swiper/css';
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Noto_Sans } from "@next/font/google";
+import ToggleButtonVariant from "../../components/ToggleButtonVariant";
 
 const textFont = Noto_Sans({
     weight: ['400'],
     subsets: ["cyrillic"]
 });
 
+interface Variant {
+    weight: number,
+    price: number,
+    available: boolean,
+    supplyDate: string
+}
+
+interface Product {
+    name: string,
+    brief: string,
+    description: string,
+    compound: string[],
+    pfc: {
+        proteins: number,
+        fats: number,
+        carbohydrates: number
+    },
+    photos: string[],
+    expiredDate: string,
+    storageCondition: string,
+    show: boolean,
+    categoryId: string,
+    variants: Variant[]
+}
+
 const Product = () => {
 
     const router = useRouter();
+    const swiperRef = useRef<SwiperCore>();
 
     const [cat, setCat] = useState("");
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState<Product>({
+        brief: "",
+        categoryId: "",
+        compound: [],
+        description: "",
+        expiredDate: "",
+        name: "",
+        pfc: {carbohydrates: 0, fats: 0, proteins: 0},
+        photos: [],
+        show: false,
+        storageCondition: "",
+        variants: []
+    });
 
     useEffect(() => {
         if (router.query.id === undefined) return;
@@ -37,12 +76,12 @@ const Product = () => {
                 setCat(res.data.name);
             });
         });
-    }, [router.query.id])
-
+    }, [router.query.id]);
+    console.log(product)
     return (
         <MainLayout>
             <section
-                className={styles["product-wrapper"]}
+                className={`${styles["product-wrapper"]} ${textFont.className}`}
             >
                 <div
                     className={`${styles["breadscrumbs"]} ${textFont.className}`}
@@ -50,127 +89,131 @@ const Product = () => {
                     <Link href={"../catalog"}>
                         Каталог
                     </Link>
-                    <Link href={`../catalog/${product?.categoryId}`}>
+                    <Link href={`../catalog/${product.categoryId}`}>
                         {cat}
                     </Link>
                     <span>
-                        {product?.name}
+                        {product.name}
                     </span>
                 </div>
                 <main>
                     <div
                         className={styles["slider-wrapper"]}
                     >
-                        <Swiper
-                            // navigation={true}
-                            modules={[Autoplay, Navigation]}
-                            loop={true}
-                            slidesPerView={2}
-                            className="patau"
-                            // breakpoints={{
-                            //     840: {
-                            //         slidesPerView: 1,
-                            //         spaceBetween: 50,
-                            //     },
-                            //     841: {
-                            //         slidesPerView: 2,
-                            //         spaceBetween: 20,
-                            //     },
-                            //     1024: {
-                            //         slidesPerView: 2,
-                            //         spaceBetween: 30,
-                            //     },
-                            // }}             
-                            autoplay={{
-                                delay: 3000,
-                                disableOnInteraction: true,
-                            }}
-                        >
-                            <SwiperSlide>
-                                <Image
-                                    src={""}
-                                    alt="present 1"
+                        {product.photos.length !== 0 &&
+                            <>
+                                <div
+                                    className={`${styles["swiper-arrow"]} ${styles["arrow-prev"]}`}
+                                    onClick={() => swiperRef.current?.slidePrev()}
                                 />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Image
-                                    src={""}
-                                    alt="present 2"
+                                <Swiper
+                                    modules={[Autoplay, Navigation]}
+                                    loop={true}
+                                    slidesPerView={"auto"}
+                                        className="patau"
+                                    spaceBetween={20}
+                                    breakpoints={{
+                                        940: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 20,
+                                        },
+                                        1024: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 30,
+                                        },
+                                    }}
+                                    autoplay={{
+                                        delay: 3000,
+                                        disableOnInteraction: true,
+                                    }}
+                                    onBeforeInit={(swiper) => {
+                                        swiperRef.current = swiper;
+                                    }}
+                                >
+                                    {product.photos.map(photoLink => {
+                                        return <SwiperSlide>
+                                            <Image
+                                                src={`http://95.163.242.54:5000/${photoLink}`}
+                                                alt={"Фото товара"}
+                                                width={320}
+                                                height={400}
+                                            />
+                                        </SwiperSlide>
+                                    })}
+                                </Swiper>
+                                <div
+                                    className={`${styles["swiper-arrow"]} ${styles["arrow-next"]}`}
+                                    onClick={() => swiperRef.current?.slideNext()}
                                 />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Image
-                                    src={""}
-                                    alt="present 3"
-                                />
-                            </SwiperSlide>
-                        </Swiper>
+                            </>
+                        }
                     </div>
-                    <div>
+                    <div
+                        className={styles["product-info"]}
+                    >
                         <h1>
-
+                            {product.name}
                         </h1>
                         <p>
-
+                            {product.brief}
                         </p>
-                        <div>
-                            toggle button
-                        </div>
-                        <div>
-                            <p>
-                                price
-                            </p>
-                            <div>
-                                <p>
-
-                                </p>
-                                <p>
-
-                                </p>
-                            </div>
-                        </div>
+                        <ToggleButtonVariant variants={product.variants} />
                     </div>
                 </main>
-                <div>
+                <div
+                    className={styles['description']}
+                >
                     <p>
-
+                        {product.description}
                     </p>
                 </div>
-                <div>
+                <div
+                    className={styles["additional-info"]}
+                >
                     <div>
                         <span>
-
+                            Состав:
                         </span>
-                        <ul>
-
+                        <ul
+                            className={styles["compound"]}
+                        >
+                            {product?.compound.toString().split('\n').map(item => (
+                                <li>
+                                    {item}
+                                </li>
+                            ))}
                         </ul>
                     </div>
-                    <div>
+                    <div
+                        className={styles['pfc']}
+                    >
                         <span>
-
+                            БЖУ/100гр:
                         </span>
                         <div>
                             <span>
-
+                                Белки - {product.pfc.proteins}ккал
                             </span>
                             <span>
-
+                                Жиры - {product.pfc.fats}ккал
                             </span>
                             <span>
-
+                                Углеводы - {product.pfc.carbohydrates}ккал
                             </span>
                         </div>
                     </div>
-                    <div>
+                    <div
+                        className={styles["storage-info"]}
+                    >
                         <span>
-
+                            Срок годности: {product.expiredDate}
                         </span>
                         <div>
                             <span>
-
+                                Условия хранения:
                             </span>
                             <span>
-
+                                {product.storageCondition}
                             </span>
                         </div>
                     </div>

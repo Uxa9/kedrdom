@@ -15,6 +15,7 @@ const GoodsCard = props => {
     const router = useRouter();
 
     const findLowestPrice = (arr: any[]) => {
+        if (arr.length === 0) return "-- "
         return Math.min(...arr.map(item => item.price));
     }
 
