@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import whatsapp from '../public/whatsapp.svg';
 import telegram from '../public/telegram.svg';
+import Link from "next/link";
 
 const textFont = Noto_Sans({
     weight: ['400'],
@@ -21,27 +22,27 @@ const Footer: React.FC = () => {
                 className={`${styles.footer} ${textFont.className}`}
             >
                 <div>
-                    <a href="/">
+                    <Link href="/">
                         Kedrdom27.ru
-                    </a>
+                    </Link>
                 </div>
                 <div>
-                    <a href="/">
+                    <Link href="/">
                         Kedrdom27.ru
-                    </a>
-                    <a target="_blank" href="https://go.2gis.com/3p0w5">
+                    </Link>
+                    <Link target="_blank" href="https://go.2gis.com/3p0w5">
                         ул. Камская, 6
-                    </a>
+                    </Link>
                     {/* а зачем тут о нас, если такой страницы нет🤔 */}
-                    <a href="/">
+                    <Link href="/">
                         О нас
-                    </a>
+                    </Link>
                 </div>
                 <div>
                     {/* а зачем тут контакты, если такой страницы нет🤔 */}
-                    <a href="/">
+                    <Link href="/">
                         Контакты
-                    </a>
+                    </Link>
                     <a href="tel:+79244029072">
                         +79244029072
                     </a>

@@ -3,6 +3,7 @@ import logo from "../public/logo.png";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Header = (props) => {
 
@@ -36,18 +37,18 @@ const Header = (props) => {
                 <span>
                     Натуральная таёжная продукция
                 </span>
-                <a href="/"
+                <Link href="/"
                     className={styles.logo}
                 >
                     <Image
                         src={logo}
                         alt={"logo"}
                     />
-                </a>
+                </Link>
                 <div
                     className={styles.links}
                 >
-                    <a target="_blank" href="https://go.2gis.com/3p0w5">
+                    <a target="_blank" rel="noreferrer" href="https://go.2gis.com/3p0w5">
                         ул. Камская, 6
                     </a>
                     <a href="tel:+79244029072">

@@ -57,6 +57,7 @@ const ToggleButtonVariant = (props) => {
                 {varArr.map((variant, index) => {
                     return (
                         <div
+                            key={index}
                             className={`${styles["variant"]} ${index === active && styles["active-variant"]}`}
                             onClick={() => {setActive(index)}}
                         >

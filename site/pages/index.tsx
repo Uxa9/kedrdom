@@ -26,6 +26,7 @@ import telegram from '../public/telegram.svg';
 import Button from "../components/Button";
 import { useRouter } from "next/router";
 import Divider from "../components/Divider";
+import Link from "next/link";
 
 const textFont = Noto_Sans({
     weight: ['400'],
@@ -218,54 +219,54 @@ const Index = () => {
                         </h2>
                     </header>
                     <main>
-                        <a
+                        <Link
                             className={styles["catalog-element"]}
                             href="/catalog/63909340c6b13635e188586d"
                         >
                             <span>
                                 Варенье
                             </span>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             className={styles["catalog-element"]}
                             href="catalog/63941926c6b13635e1885cd2"
                         >
                             <span>
                                 Мёд
                             </span>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             className={styles["catalog-element"]}
                             href="catalog/63949755c6b13635e1886651"
                         >
                             <span>
                                 Чай
                             </span>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             className={styles["catalog-element"]}
                             href="catalog/6395bf41c6b13635e1886c8a"
                         >
                             <span>
                                 Масло
                             </span>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             className={styles["catalog-element"]}
                             href="catalog/6395bf5bc6b13635e1886c90"
                         >
                             <span>
                                 Сласти
                             </span>
-                        </a>
-                        <a
+                        </Link>
+                        <Link
                             className={styles["catalog-element"]}
                             href="catalog/6395bf64c6b13635e1886c94"
                         >
                             <span>
                                 Дикое мясо
                             </span>
-                        </a>
+                        </Link>
                     </main>
                     <Button
                         onClick={() => router.push('/catalog')}

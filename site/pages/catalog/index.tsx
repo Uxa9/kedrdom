@@ -31,9 +31,10 @@ const Catalog = () => {
                 <div
                     className={styles['cards']}
                 >
-                    {products.map(pr => {
+                    {products.map((pr, index) => {
                         return (
                             <GoodsCard
+                                key={index}
                                 data={pr}
                             />
                         )

@@ -130,8 +130,8 @@ const Product = () => {
                                         swiperRef.current = swiper;
                                     }}
                                 >
-                                    {product.photos.map(photoLink => {
-                                        return <SwiperSlide>
+                                    {product.photos.map((photoLink, index) => {
+                                        return <SwiperSlide key={index}>
                                             <Image
                                                 src={`http://95.163.242.54:5000/${photoLink}`}
                                                 alt={"Фото товара"}
@@ -177,8 +177,10 @@ const Product = () => {
                         <ul
                             className={styles["compound"]}
                         >
-                            {product?.compound.toString().split('\n').map(item => (
-                                <li>
+                            {product?.compound.toString().split('\n').map((item, index) => (
+                                <li
+                                    key={index}
+                                >
                                     {item}
                                 </li>
                             ))}

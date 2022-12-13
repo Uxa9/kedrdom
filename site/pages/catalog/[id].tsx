@@ -16,7 +16,7 @@ const Catalog = () => {
 
     useEffect(() => {
         if (router.query.id === undefined) return;
-        
+
         axios.get(`http://95.163.242.54:5000/category/${router.query.id}`).then(res => {
             setCatName(res.data.name);
         });
@@ -37,9 +37,10 @@ const Catalog = () => {
                 <div
                     className={styles['cards']}
                 >
-                    {products.map(pr => {
+                    {products.map((pr, index) => {
                         return (
                             <GoodsCard
+                                key={index}
                                 data={pr}
                             />
                         )
