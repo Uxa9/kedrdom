@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
-        hostname: '95.163.242.54',
+        protocol: 'https',
+        hostname: 'kedrdom27.ru/',
         port: '5000',
         pathname: '/**',
       },

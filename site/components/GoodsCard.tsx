@@ -26,7 +26,7 @@ const GoodsCard = props => {
         >
             {props.data.photos.length > 0 ?
                 <Image 
-                    src={`http://95.163.242.54:5000/${props.data.photos[0]}`}
+                    src={`https://kedrdom27.ru:5000/${props.data.photos[0]}`}
                     alt={"Товар"}
                     width={1028}
                     height={1028}

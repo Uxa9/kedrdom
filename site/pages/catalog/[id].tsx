@@ -17,10 +17,10 @@ const Catalog = () => {
     useEffect(() => {
         if (router.query.id === undefined) return;
 
-        axios.get(`http://95.163.242.54:5000/category/${router.query.id}`).then(res => {
+        axios.get(`https://kedrdom27.ru:5000/category/${router.query.id}`).then(res => {
             setCatName(res.data.name);
         });
-        axios.get(`http://95.163.242.54:5000/product/category/${router.query.id}`).then(res => {
+        axios.get(`https://kedrdom27.ru:5000/product/category/${router.query.id}`).then(res => {
             setProducts(res.data);
         });
     }, [router.query.id]);

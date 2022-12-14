@@ -14,7 +14,7 @@ const Catalog = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://95.163.242.54:5000/product/").then(res => {
+        axios.get("https://kedrdom27.ru:5000/product/").then(res => {
             setProducts(res.data);
         });
     }, []);

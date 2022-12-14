@@ -73,7 +73,7 @@ const Present = () => {
         const props: UploadProps = {
             name: 'photos',
             multiple: true,
-            action: `http://95.163.242.54:5000/present/uploadPhoto/${presentId}`,
+            action: `https://kedrdom27.ru/present/uploadPhoto/${presentId}`,
             listType: "picture",
             className: "upload-list-inline"
         };

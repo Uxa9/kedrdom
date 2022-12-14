@@ -68,11 +68,11 @@ const Product = () => {
     useEffect(() => {
         if (router.query.id === undefined) return;
 
-        axios.get(`http://95.163.242.54:5000/product/${router.query.id}`).then(res => {
+        axios.get(`https://kedrdom27.ru:5000/product/${router.query.id}`).then(res => {
             console.log(res.data);
             setProduct(res.data);
 
-            axios.get(`http://95.163.242.54:5000/category/${res.data.categoryId}`).then(res => {
+            axios.get(`https://kedrdom27.ru:5000/category/${res.data.categoryId}`).then(res => {
                 setCat(res.data.name);
             });
         });
@@ -133,7 +133,7 @@ const Product = () => {
                                     {product.photos.map((photoLink, index) => {
                                         return <SwiperSlide key={index}>
                                             <Image
-                                                src={`http://95.163.242.54:5000/${photoLink}`}
+                                                src={`https://kedrdom27.ru:5000/${photoLink}`}
                                                 alt={"Фото товара"}
                                                 width={320}
                                                 height={400}

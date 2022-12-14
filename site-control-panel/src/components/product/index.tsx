@@ -196,7 +196,7 @@ const Products = () => {
         const props: UploadProps = {
             name: 'photos',
             multiple: true,
-            action: `http://95.163.242.54:5000/product/uploadPhoto/${productId}`,
+            action: `https://kedrdom27.ru:5000/product/uploadPhoto/${productId}`,
             listType: "picture",
             className: "upload-list-inline"
         };
@@ -435,7 +435,7 @@ const Products = () => {
                                 cover={
                                     <img
                                         alt="example"
-                                        src={`http://95.163.242.54:5000/${product.photos[0]}` || "http://95.163.242.54:5000/product/test.jpg"}
+                                        src={`https://kedrdom27.ru:5000/${product.photos[0]}` || "https://kedrdom27.ru:5000/product/test.jpg"}
                                     />
                                 }
                                 actions={[
@@ -455,7 +455,7 @@ const Products = () => {
                                                     uid: index.toString(),
                                                     name: item,
                                                     status: 'done',
-                                                    url: `http://95.163.242.54:5000/${product.photos[index]}` || "http://95.163.242.54:5000/product/test.jpg"
+                                                    url: `https://kedrdom27.ru:5000/${product.photos[index]}` || "https://kedrdom27.ru:5000/product/test.jpg"
                                                 }
                                             }))
                                         }}
@@ -675,7 +675,7 @@ const Products = () => {
                     <span>Фотографии</span>
                     <Upload
                         name="photos"
-                        action={`http://95.163.242.54:5000/product/uploadPhoto/${productId}`}
+                        action={`https://kedrdom27.ru:5000/product/uploadPhoto/${productId}`}
                         listType="picture-card"
                         fileList={fileList}
                         multiple={true}
