@@ -3,14 +3,17 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'kedrdom27.ru/',
-        port: '5000',
-        pathname: '/**',
-      },
-    ],
+    loader: "kedrdom27",
+    domains: ['kedrdom27.ru:5000'],
+    path: "https://kedrdom.27.ru:5000"
+    // remotePatterns: [
+    //   {
+    //     protocol: 'https',
+    //     hostname: 'kedrdom27.ru/',
+    //     port: '5000',
+    //     pathname: '/**',
+    //   },
+    // ],
   },
 }
 

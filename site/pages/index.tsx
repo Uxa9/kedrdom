@@ -221,7 +221,7 @@ const Index = () => {
                     <main>
                         <Link
                             className={styles["catalog-element"]}
-                            href="/catalog/63909340c6b13635e188586d"
+                            href="catalog/63909340c6b13635e188586d"
                         >
                             <span>
                                 Варенье
