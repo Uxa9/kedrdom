@@ -1,7 +1,7 @@
 import styles from "../styles/Header.module.scss";
 import logo from "../public/logo.png";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -9,6 +9,10 @@ const Header = (props) => {
 
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        setIsOpen(props.isMenuOpen);
+    }, [props.isMenuOpen])
 
     return (
         <>
@@ -28,7 +32,7 @@ const Header = (props) => {
                         }
                         onClick={() => {
                             setIsOpen(!isOpen);
-                            props.handleBurgerClick(isOpen);
+                            props.handleBurgerClick(!isOpen);
                         }}
                     >
                         <div className={styles["burger-stripes"]} />

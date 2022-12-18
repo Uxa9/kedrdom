@@ -67,9 +67,7 @@ export class CategoryService {
         return arr;
     }
 
-    async update(dto: EditCategoryDto): Promise<any> {
-        console.log(dto);
-        
+    async update(dto: EditCategoryDto): Promise<any> {        
         try {
             await this.categoryModel.findByIdAndUpdate(dto._id, dto);
 

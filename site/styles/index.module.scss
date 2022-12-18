@@ -74,7 +74,6 @@
                 width: 100%;
                 height: 100%;
 
-                border: 2px solid $brown;
                 border-radius: 30px;
 
                 position: relative;
@@ -314,6 +313,7 @@
         .catalog-element {
             display: flex;
             align-items: flex-end;
+            overflow: hidden;
 
             max-width: 450px;
             width: 100%;
@@ -325,10 +325,24 @@
 
             position: relative;
 
+            img {
+                width: 100%;
+                height: 100%;
+
+                object-fit: cover;
+
+                transition: transform .3s ease-in-out;
+                -moz-transition: transform .3s ease-in-out;
+                -ms-transition:transform .3s ease-in-out;
+                -o-transition: transform .3s ease-in-out;
+                -webkit-transition: transform .3s ease-in-out;  
+            }
+
             span {
                 position: absolute;
                 font-size: 36px;
                 line-height: 42px;
+                z-index: 4;
 
                 color: $light-gray;
                 left: 27px;
@@ -337,35 +351,36 @@
 
             &:nth-child(1) {
                 border-radius: 60px 0 0 0;
-                background-image: url('/jam.webp');
+                // background-image: url('/jam.webp');
 
-                &::before {
+                &::before, img {
                     border-radius: 60px 0 0 0;
                 }
+                
             }
 
             &:nth-child(2) {
                 border-radius: 0 60px 0 0;
-                background-image: url('/honey.jpg');
+                // background-image: url('/honey.jpg');
 
-                &::before {
+                &::before, img {
                     border-radius: 0 60px 0 0;
                 }
             }
 
             &:nth-child(3) {
-                background-image: url('/tea.webp');
+                // background-image: url('/tea.webp');
             }
 
             &:nth-child(4) {
-                background-image: url('/oil.jpg');
+                // background-image: url('/oil.jpg');
             }
 
             &:nth-child(5) {
                 border-radius: 0 0 0 60px;
-                background-image: url('/sweets.webp');
+                // background-image: url('/sweets.webp');
 
-                &::before {
+                &::before, img {
                     border-radius: 0 0 0 60px;
                 }
             }
@@ -374,7 +389,7 @@
                 border-radius: 0 0 60px 0;
                 background-image: url('/meat.webp');
 
-                &::before {
+                &::before, img {
                     border-radius: 0 0 60px 0;
                 }
             }
@@ -390,21 +405,20 @@
             &::before {
                 display: block;
                 content: "";
-
+                position: absolute;
+                z-index: 2;
                 width: 100%;
                 height: 100%;
 
                 background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
             }
 
-            transition: background-size .3s ease-in-out;
-            -moz-transition: background-size .3s ease-in-out;
-            -ms-transition: background-size .3s ease-in-out;
-            -o-transition: background-size .3s ease-in-out;
-            -webkit-transition: background-size .3s ease-in-out;
-
             &:hover {
-                background-size: 120%;
+
+                img {
+                    transform: scale(120%);
+                    z-index: 1;
+                }
             }
         }
     }

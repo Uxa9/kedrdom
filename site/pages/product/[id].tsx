@@ -69,7 +69,6 @@ const Product = () => {
         if (router.query.id === undefined) return;
 
         axios.get(`https://kedrdom27.ru:5000/product/${router.query.id}`).then(res => {
-            console.log(res.data);
             setProduct(res.data);
 
             axios.get(`https://kedrdom27.ru:5000/category/${res.data.categoryId}`).then(res => {
@@ -77,7 +76,7 @@ const Product = () => {
             });
         });
     }, [router.query.id]);
-    console.log(product)
+    
     return (
         <MainLayout>
             <section
@@ -111,13 +110,17 @@ const Product = () => {
                                     loop={true}
                                     slidesPerView={"auto"}
                                         className="patau"
-                                    spaceBetween={20}
+                                    spaceBetween={0}
                                     breakpoints={{
                                         940: {
                                             slidesPerView: 1,
-                                            spaceBetween: 20,
+                                            spaceBetween: 0,
                                         },
                                         1024: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 30,
+                                        },                                        
+                                        1200: {
                                             slidesPerView: 2,
                                             spaceBetween: 30,
                                         },

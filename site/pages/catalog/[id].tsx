@@ -27,7 +27,6 @@ const Catalog = () => {
 
     return (
         <MainLayout>
-            <SideCatalogMenu />
             <section
                 className={styles['catalog']}
             >

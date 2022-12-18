@@ -18,6 +18,12 @@ import icon1 from '../public/icon_1.png';
 import icon2 from '../public/icon_2.png';
 import icon3 from '../public/icon_3.png';
 import icon4 from '../public/icon_4.png';
+import cat1  from '../public/jam.webp'; 
+import cat2  from '../public/honey.jpg';
+import cat3  from '../public/tea.webp';
+import cat4  from '../public/oil.jpg';
+import cat5  from '../public/sweets.webp';
+import cat6  from '../public/meat.webp';     
 import present1 from '../public/present_1.jpg';
 import present2 from '../public/present_2.jpg';
 import present3 from '../public/present_3.jpg';
@@ -27,6 +33,7 @@ import Button from "../components/Button";
 import { useRouter } from "next/router";
 import Divider from "../components/Divider";
 import Link from "next/link";
+
 
 const textFont = Noto_Sans({
     weight: ['400'],
@@ -226,6 +233,10 @@ const Index = () => {
                             <span>
                                 Варенье
                             </span>
+                            <Image
+                                src={cat1}
+                                alt="Варенье"
+                            />
                         </Link>
                         <Link
                             className={styles["catalog-element"]}
@@ -234,6 +245,10 @@ const Index = () => {
                             <span>
                                 Мёд
                             </span>
+                            <Image
+                                src={cat2}
+                                alt="Варенье"
+                            />
                         </Link>
                         <Link
                             className={styles["catalog-element"]}
@@ -242,6 +257,10 @@ const Index = () => {
                             <span>
                                 Чай
                             </span>
+                            <Image
+                                src={cat3}
+                                alt="Варенье"
+                            />
                         </Link>
                         <Link
                             className={styles["catalog-element"]}
@@ -250,6 +269,10 @@ const Index = () => {
                             <span>
                                 Масло
                             </span>
+                            <Image
+                                src={cat4}
+                                alt="Варенье"
+                            />
                         </Link>
                         <Link
                             className={styles["catalog-element"]}
@@ -258,6 +281,10 @@ const Index = () => {
                             <span>
                                 Сласти
                             </span>
+                            <Image
+                                src={cat5}
+                                alt="Варенье"
+                            />
                         </Link>
                         <Link
                             className={styles["catalog-element"]}
@@ -266,6 +293,10 @@ const Index = () => {
                             <span>
                                 Дикое мясо
                             </span>
+                            <Image
+                                src={cat6}
+                                alt="Варенье"
+                            />
                         </Link>
                     </main>
                     <Button

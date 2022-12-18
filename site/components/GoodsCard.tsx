@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Noto_Sans } from "@next/font/google";
 
 import styles from "../styles/GoodsCard.module.scss";
-import Link from "next/link";
+// import Link from "next/link";
 import { useRouter } from "next/router";
 
 const textFont = Noto_Sans({
@@ -25,11 +25,13 @@ const GoodsCard = props => {
             onClick={() => router.push(`/product/${props.data._id}`)}
         >
             {props.data.photos.length > 0 ?
-                <Image 
-                    src={`${props.data.photos[0]}`}
+                <Image  
+                    src={`https://kedrdom27.ru:5000/${props.data.photos[0]}`}
                     alt={"Товар"}
                     width={1028}
                     height={1028}
+                    placeholder={"blur"}
+                    blurDataURL={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMM4GWoBwAB8ADeYO5FygAAAABJRU5ErkJggg=="}
                 /> :
                 <div className={styles["image-boilerplate"]} />
             }

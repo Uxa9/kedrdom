@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Noto_Sans } from "@next/font/google";
 
 import styles from "../styles/SideCatalogMenu.module.scss";
+import MenuComponent from "../components/MenuComponent";
 
 const textFont = Noto_Sans({
     weight: ['400'],
@@ -28,13 +29,18 @@ const SideCatalogMenu = (props) => {
     const renderMenu = (items: any[]) => {
         return <ul>
             {items.map(i => {
-                return <li>
-                    <Link
-                        href={`/catalog/${i.key}`}
+                return <li
+                        onClick={props.clickHandler}
                     >
-                        {i.label}
-                    </Link>
-                    {i.children && renderMenu(i.children)}
+                        <span>
+                            <Link
+                                href={`/catalog/${i.key}`}
+                            >
+                                {i.label}
+                            </Link>
+                            {i.children && <div className={styles.arrow} />}
+                        </span>
+                        {i.children && renderMenu(i.children)}
                 </li>
             })}
         </ul>
@@ -60,9 +66,8 @@ const SideCatalogMenu = (props) => {
 
     useEffect(() => {
         axios.get("https://kedrdom27.ru:5000/category/").then(res => {
-            setCategories(res.data);
-            console.log(parseMenuItems(res.data));
-        })
+            setCategories(res.data);            
+        });
     }, []);
 
     return (
@@ -71,7 +76,9 @@ const SideCatalogMenu = (props) => {
         >
             <nav>
                 <ul>
-                    <li>
+                    <li
+                        onClick={props.clickHandler}
+                    >
                         <Link
                             href={`/catalog`}
                         >
@@ -79,9 +86,19 @@ const SideCatalogMenu = (props) => {
                         </Link>
                     </li>
                 </ul>
-                {renderMenu(parseMenuItems(categories))}
+                <ul>
+                    {parseMenuItems(categories).map(item => 
+                        <MenuComponent
+                            item={item}
+                            onClick={props.clickHandler}
+                        />
+                    )}
+                </ul>
             </nav>
             {/* {parseMenuItems(categories)} */}
+            <div
+                className={`${styles["aside-bg"]}`}
+            />
         </aside>
     )
 }

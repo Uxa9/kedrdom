@@ -3,9 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    loader: "kedrdom27",
-    domains: ['kedrdom27.ru:5000'],
-    path: "https://kedrdom.27.ru:5000"
+    // loader: "kedrdom27",
+    domains: ['kedrdom27.ru'],
+    // path: "https://kedrdom.27.ru:5000"
     // remotePatterns: [
     //   {
     //     protocol: 'https',
