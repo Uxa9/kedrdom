@@ -19,10 +19,11 @@ const MenuComponent = (props) => {
             </span>
             {open && props.item.children && 
                 <ul>
-                    {props.item.children.map((item: any) => 
+                    {props.item.children.map((item: any, index: any) => 
                         <MenuComponent 
                             item={item}
                             onClick={props.onClick}
+                            key={index}
                         />
                     )}
                 </ul>

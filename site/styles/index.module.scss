@@ -682,7 +682,7 @@
                 &:nth-child(1) {
                     border-radius: 20px 0 0 0 !important;
 
-                    &::before {
+                    &::before, img {
                         border-radius: 20px 0 0 0 !important;
                     }
                 }
@@ -690,7 +690,7 @@
                 &:nth-child(2) {
                     border-radius: 0 20px 0 0;
 
-                    &::before {
+                    &::before, img {
                         border-radius: 0 20px 0 0;
                     }
                 }
@@ -698,7 +698,7 @@
                 &:nth-child(5) {
                     border-radius: 0 0 0 20px;
 
-                    &::before {
+                    &::before, img {
                         border-radius: 0 0 0 20px;
                     }
                 }
@@ -706,7 +706,7 @@
                 &:nth-child(6) {
                     border-radius: 0 0 20px 0;
 
-                    &::before {
+                    &::before, img {
                         border-radius: 0 0 20px 0;
                     }
                 }
