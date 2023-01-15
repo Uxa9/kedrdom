@@ -1,7 +1,8 @@
 @import './variables.scss';
 
 .menu {
-    position: absolute;
+    position: sticky;
+    top: 0;
     // height: calc(100% + 19px);
     // width: calc(100% + 40px);
     padding: 40px 20px;
@@ -9,6 +10,8 @@
 
     // transform: translateX(0);
     // opacity: 1;
+
+    height: max-content;
 
     z-index: 99999999;
 

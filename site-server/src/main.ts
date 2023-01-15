@@ -14,12 +14,12 @@ import * as path from "path";
 // };
 
 const httpsOptions = {
-    key: fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate.key`),
-    cert: fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate.crt`),
-    ca: [
-        fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate_ca_root.crt`),
-        fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate_ca_bundle.crt`)
-    ]
+    // key: fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate.key`),
+    // cert: fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate.crt`),
+    // ca: [
+    //     fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate_ca_root.crt`),
+    //     fs.readFileSync(`${path.parse(process.cwd()).root}root/ssl/certificate_ca_bundle.crt`)
+    // ]
 };
 
 const start = async () => {

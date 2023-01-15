@@ -81,6 +81,7 @@ const SideCatalogMenu = (props) => {
                     >
                         <Link
                             href={`/catalog`}
+                            scroll={false}
                         >
                             Показать все
                         </Link>

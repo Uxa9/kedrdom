@@ -37,6 +37,8 @@
 
 .content-main-wrapper {
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
 
     position: relative;
 }
@@ -44,6 +46,7 @@
 @media screen and (max-width: 680px) {
 
     .main-wrapper {
+
         aside {
             transform: translateX(-100%);
             opacity: 0;

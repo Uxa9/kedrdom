@@ -15,6 +15,10 @@ const nextConfig = {
     //   },
     // ],
   },
+  experimental: {
+    modern: true,
+    scrollRestoration: true,
+ }
 }
 
 module.exports = nextConfig
