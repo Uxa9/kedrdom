@@ -95,6 +95,13 @@ const Product = () => {
                         {product.name}
                     </span>
                 </div>
+                <div
+                    className={styles["back-button"]}
+                    onClick={() => {router.back()}}
+                >
+                    <div className={styles["arrow"]} />
+                    Вернуться назад
+                </div>
                 <main>
                     <div
                         className={styles["slider-wrapper"]}

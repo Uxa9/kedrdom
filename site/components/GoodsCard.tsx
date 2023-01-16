@@ -31,6 +31,7 @@ const GoodsCard = props => {
                     width={1028}
                     height={1028}
                     placeholder={"blur"}
+                    loading={"eager"}
                     blurDataURL={"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mMM4GWoBwAB8ADeYO5FygAAAABJRU5ErkJggg=="}
                 /> :
                 <div className={styles["image-boilerplate"]} />

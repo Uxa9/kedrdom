@@ -8,16 +8,25 @@ const MenuComponent = (props) => {
     return <li
             onClick={props.clickHandler}
         >
-            <span>
-                <Link
-                    href={`/catalog/${props.item.key}`}
-                    onClick={props.onClick}
+            {props.item.children ?
+                <span
+                    onClick={() => setOpen(!open)}
                 >
-                    {props.item.label}
-                </Link>
-                {props.item.children && <div className={`${open && 'arrow-open'} arrow`} onClick={() => setOpen(!open)}/>}
-            </span>
-            {open && props.item.children && 
+                    <span style={{ cursor: "pointer" }}>
+                        {props.item.label}
+                    </span>
+                    {props.item.children && <div className={`${open && 'arrow-open'} arrow`}/>}
+                </span> :
+                <span>
+                    <Link
+                        href={`/catalog/${props.item.key}`}
+                        onClick={props.onClick}
+                    >
+                        {props.item.label}
+                    </Link>
+                </span>
+            }
+            {open && props.item.children &&
                 <ul>
                     {props.item.children.map((item: any, index: any) => 
                         <MenuComponent 
@@ -26,6 +35,14 @@ const MenuComponent = (props) => {
                             key={index}
                         />
                     )}
+                    <li>
+                        <Link
+                            href={`/catalog/${props.item.key}`}
+                            onClick={props.onClick}
+                        >
+                            Показать все
+                        </Link>
+                    </li>
                 </ul>
             }
     </li>

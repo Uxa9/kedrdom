@@ -8,16 +8,27 @@ import GoodsCard from "../../components/GoodsCard";
 
 import styles from "../../styles/Catalog.module.scss";
 
+export async function getServerSideProps(ctx) {
+    const products = await axios.get("https://kedrdom27.ru:5000/product/").then(res => {
+        return res.data;
+    });
 
-const Catalog = () => {
+    return {
+        props: {products}
+    }
+}
 
-    const [products, setProducts] = useState([]);
+const Catalog = (props) => {
 
-    useEffect(() => {
-        axios.get("https://kedrdom27.ru:5000/product/").then(res => {
-            setProducts(res.data);
-        });
-    }, []);
+    const products = props.products || [];
+    console.log(products)
+    // const [products, setProducts] = useState([]);
+
+    // useEffect(() => {
+    //     axios.get("https://kedrdom27.ru:5000/product/").then(res => {
+    //         setProducts(res.data);
+    //     });
+    // }, []);
 
     return (
         <MainLayout>
