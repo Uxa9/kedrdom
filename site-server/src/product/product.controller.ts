@@ -26,9 +26,24 @@ export class ProductController {
         return this.productService.getAll();
     }
 
+    @Get('/pageAmount/')
+    getPagesAmount(@Query() query: any) {
+        return this.productService.getPagesAmount(query);
+    }
+
+    @Get('/page=:page')
+    getAllByPage(@Param('page') page: number) {
+        return this.productService.getAll(page);
+    }
+
     @Get('/:id')
     getById(@Param('id') id: ObjectId) {
         return this.productService.getById(id);
+    }
+
+    @Get('/:id/page=:page')
+    getByIdByPage(@Param('id') id: ObjectId, @Param('page') page: number) {        
+        return this.productService.getByIdByPage(id, page);
     }
 
     @Post()

@@ -80,7 +80,7 @@ const SideCatalogMenu = (props) => {
                         onClick={props.clickHandler}
                     >
                         <Link
-                            href={`/catalog`}
+                            href={`/catalog?page=1`}
                             scroll={false}
                         >
                             Показать все

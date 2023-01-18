@@ -25,10 +25,20 @@ export class ProductService {
         return await this.productModel.findById(id);
     }
 
-    async getAll(): Promise<Product[]> {
-        return this.productModel.find({}, {}, {
-            limit: 30
-        })
+    async getByIdByPage(category: ObjectId, page: number = 0): Promise<Product[]> {
+
+        const cats = (await this.categoryService.getAllNestedById(category)).map(cat => cat._id);
+        
+        if (page !== 0) return this.productModel.find({categoryId: { $in: cats }}).limit(9).skip(--page * 9);
+        else return this.productModel.find({categoryId: { $in: cats }});
+
+    }
+
+    async getAll(page: number = 0): Promise<Product[]> {
+        
+        if (page !== 0) return this.productModel.find().limit(9).skip(--page * 9);
+        else return this.productModel.find();
+        
     }
 
     async getAllProducts(category: ObjectId): Promise<Product[]> {
@@ -127,6 +137,18 @@ export class ProductService {
         // cringe
 
         return;
+    }
+
+    async getPagesAmount(query: any): Promise<Number> {
+
+        if (query.categoryId !== undefined) {
+            const categories = (await this.categoryService.getAllNestedById(query.categoryId)).map(item => item._id.toString());
+            
+            return Math.ceil((await this.productModel.find({ categoryId : { $in : categories }}).select('_id')).length / 9);
+        
+        } else {
+            return Math.ceil((await this.productModel.find().select('_id')).length / 9);
+        }        
     }
 
 }

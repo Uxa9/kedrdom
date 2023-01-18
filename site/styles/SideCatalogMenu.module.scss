@@ -20,6 +20,24 @@
 
     background-color: #d6c3b8;
 
+    // max-height: 100vh;
+    // box-sizing: border-box;
+    // overflow-y: scroll;
+
+    // &::-webkit-scrollbar {
+    //     width: 4px;
+    //     height: 4px;
+    // }
+
+    // &::-webkit-scrollbar-track {
+    //     background: transparent;
+    // }
+
+    // &::-webkit-scrollbar-thumb {
+    //     background-color: #322C35;
+    //     border-radius: 2px;
+    // }
+
     ul {
         list-style: none;
         margin: 0;
@@ -31,6 +49,7 @@
 
     li {
         margin: 8px 0;
+        cursor: pointer;
 
         span {
             display: flex;

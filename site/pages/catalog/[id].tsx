@@ -7,23 +7,30 @@ import SideCatalogMenu from "../../layouts/SideCatalogMenu";
 import GoodsCard from "../../components/GoodsCard";
 
 import styles from "../../styles/Catalog.module.scss";
+import Pagination from "../../components/Pagination";
 
-const Catalog = () => {
+export async function getServerSideProps(ctx) {
 
-    const [catName, setCatName] = useState("");
-    const [products, setProducts] = useState([]);
+    const catName = await axios.get(`http://localhost:5000/category/${ctx.query.id}`).then(res => {
+            return res.data.name;
+        });
+
+    const products = await axios.get(`http://localhost:5000/product/${ctx.query.id}/page=${ctx.query.page || 1}`).then(res => {
+        console.log(res.data);
+        
+        return res.data;
+    });
+
+    return {
+        props: { products, catName }
+    }
+}
+
+const Catalog = (props) => {
+
+    const products = props.products || [];
+    const catName = props.catName || "";
     const router = useRouter();
-
-    useEffect(() => {
-        if (router.query.id === undefined) return;
-
-        axios.get(`https://kedrdom27.ru:5000/category/${router.query.id}`).then(res => {
-            setCatName(res.data.name);
-        });
-        axios.get(`https://kedrdom27.ru:5000/product/category/${router.query.id}`).then(res => {
-            setProducts(res.data);
-        });
-    }, [router.query.id]);
 
     return (
         <MainLayout>
@@ -45,6 +52,7 @@ const Catalog = () => {
                         )
                     })}
                 </div>
+                <Pagination />
             </section>
         </MainLayout>
     )

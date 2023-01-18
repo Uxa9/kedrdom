@@ -7,28 +7,22 @@ import SideCatalogMenu from "../../layouts/SideCatalogMenu";
 import GoodsCard from "../../components/GoodsCard";
 
 import styles from "../../styles/Catalog.module.scss";
+import Pagination from "../../components/Pagination";
 
 export async function getServerSideProps(ctx) {
-    const products = await axios.get("https://kedrdom27.ru:5000/product/").then(res => {
+
+    const products = await axios.get(`http://localhost:5000/product/page=${ctx.query.page || 1}`).then(res => {
         return res.data;
     });
 
     return {
-        props: {products}
+        props: { products }
     }
 }
 
 const Catalog = (props) => {
 
     const products = props.products || [];
-    console.log(products)
-    // const [products, setProducts] = useState([]);
-
-    // useEffect(() => {
-    //     axios.get("https://kedrdom27.ru:5000/product/").then(res => {
-    //         setProducts(res.data);
-    //     });
-    // }, []);
 
     return (
         <MainLayout>
@@ -49,8 +43,10 @@ const Catalog = (props) => {
                             />
                         )
                     })}
-                </div>
+                </div>         
+                <Pagination />
             </section>
+
         </MainLayout>
     )
 }

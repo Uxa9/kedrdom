@@ -114,7 +114,7 @@ const Index = () => {
                                 </div>
                             </div>
                             <Button
-                                onClick={() => router.push('/catalog')}
+                                onClick={() => router.push('/catalog?page=1')}
                                 text="Каталог"
                             />
                         </div>
@@ -300,7 +300,7 @@ const Index = () => {
                         </Link>
                     </main>
                     <Button
-                        onClick={() => router.push('/catalog')}
+                        onClick={() => router.push('/catalog?page=1')}
                         text="Показать все"
                     />
                 </nav>

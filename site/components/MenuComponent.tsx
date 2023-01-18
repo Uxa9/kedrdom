@@ -12,7 +12,7 @@ const MenuComponent = (props) => {
                 <span
                     onClick={() => setOpen(!open)}
                 >
-                    <span style={{ cursor: "pointer" }}>
+                    <span>
                         {props.item.label}
                     </span>
                     {props.item.children && <div className={`${open && 'arrow-open'} arrow`}/>}
