@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                         className={styles.links}
                     >
                         <a 
-                            href=""
+                            href="https://wa.me/79244029072"
                             style={{ marginRight: "5px" }}    
                         >
                             <Image
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
                                 alt={"whatsapp"}
                             />
                         </a>
-                        <a href="">
+                        <a href="https://t.me/kedrdom27">
                             <Image
                                 src={telegram}
                                 alt={"telegram"}

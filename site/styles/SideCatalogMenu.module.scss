@@ -18,7 +18,7 @@
 
     transition: transform .5s, opacity .3s;
 
-    background-color: #d6c3b8;
+    background-color: $bg-light;
 
     // max-height: 100vh;
     // box-sizing: border-box;
@@ -61,7 +61,7 @@
 @media screen and (max-width: 680px) {
     .menu {
         position: absolute;
-        height: calc(100% + 19px);
+        //height: calc(100% + 19px);
         width: calc(100% + 40px);
         padding: 40px 20px;
         left: -20px;

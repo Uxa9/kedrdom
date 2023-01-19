@@ -2,40 +2,73 @@ import axios from "axios";
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+import styles from "../styles/Pagination.module.scss";
 
 const Pagination = () => {
 
-    const [pages, setPages] = useState(0);
     const router = useRouter();
+    const [pages, setPages] = useState(0);
+    const [showPageNumbers, setShowPageNumbers] = useState<number[]>([]);
 
     useEffect(() => {
-        console.log(Router.query);
-        
+
         if (router.query.id === undefined) {
-            axios.get(`http://localhost:5000/product/pageAmount`).then(res => {
+            axios.get(`https://kedrdom27.ru:5000/product/pageAmount`).then(res => {
                 setPages(res.data);
             });
         } else {
-            axios.get(`http://localhost:5000/product/pageAmount?categoryId=${router.query.id}`).then(res => {
+            axios.get(`https://kedrdom27.ru/product/pageAmount?categoryId=${router.query.id}`).then(res => {
                 setPages(res.data);
             });
         }
         
     }, [router.query]);
 
+    useEffect(() => {
+        let pageNums = [];
+        for (let i = 1; i <= 3; i++) {
+            if (Number(router.query.page) - i > 0)
+                pageNums.unshift(Number(router.query.page) - i);
+            else break;
+        }
+
+        pageNums.push(Number(router.query.page));
+
+        for (let i = 1; i <= 3; i++) {
+            if (Number(router.query.page) + i <= pages)
+                pageNums.push(Number(router.query.page) + i);
+            else break;
+        }
+
+        setShowPageNumbers(pageNums);
+
+    }, [router.query.page, router.query.id, pages])
+
     return (
-        <div>
-            {Array(pages).fill(0).map((item, index) => (
+        <div
+            className={styles['pagination-wrapper']}
+        >
+            {Number(router.query.page) !== 1 &&
                 <button
-                    onClick={() => {
-                        const regEx = /[0-9]/g;
-                        console.log(Router.asPath.split('?', 1));
-                        Router.push(`${Router.asPath.split('?', 1)[0]}?page=${index}`);
-                    }}
+                    className={`${styles['arrow']} ${styles['arrow-back']}`}
+                    onClick={() => router.push(`${Router.asPath.split('?', 1)[0]}?page=${Number(router.query.page) - 1}`)}
+                />
+            }
+            {showPageNumbers.map(item =>
+                <button
+                    onClick={() => router.push(`${Router.asPath.split('?', 1)[0]}?page=${item}`)}
+                    className={`${styles['pagination-page']} ${Number(router.query.page) === item && styles['active-page']}`}
+                    key={item}
                 >
-                    {++index}
+                    {item}
                 </button>
-            ))}
+            )}
+            {Number(router.query.page) !== pages &&
+                <button
+                    className={`${styles['arrow']} ${styles['arrow-forward']}`}
+                    onClick={() => router.push(`${Router.asPath.split('?', 1)[0]}?page=${Number(router.query.page) +1}`)}
+                />
+            }
         </div>
     )
 }

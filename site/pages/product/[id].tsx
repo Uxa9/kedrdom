@@ -88,7 +88,7 @@ const Product = () => {
                     <Link href={"../catalog"}>
                         Каталог
                     </Link>
-                    <Link href={`../catalog/${product.categoryId}`}>
+                    <Link href={`../catalog/${product.categoryId}?page=1`}>
                         {cat}
                     </Link>
                     <span>

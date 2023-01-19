@@ -19,7 +19,7 @@ const MenuComponent = (props) => {
                 </span> :
                 <span>
                     <Link
-                        href={`/catalog/${props.item.key}`}
+                        href={`/catalog/${props.item.key}?page=1`}
                         onClick={props.onClick}
                     >
                         {props.item.label}
@@ -37,7 +37,7 @@ const MenuComponent = (props) => {
                     )}
                     <li>
                         <Link
-                            href={`/catalog/${props.item.key}`}
+                            href={`/catalog/${props.item.key}?page=1`}
                             onClick={props.onClick}
                         >
                             Показать все

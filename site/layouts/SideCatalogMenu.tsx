@@ -34,7 +34,7 @@ const SideCatalogMenu = (props) => {
                     >
                         <span>
                             <Link
-                                href={`/catalog/${i.key}`}
+                                href={`/catalog/${i.key}?page=1`}
                             >
                                 {i.label}
                             </Link>
