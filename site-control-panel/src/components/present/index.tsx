@@ -1,19 +1,47 @@
-import { Button, Checkbox, Form, Input, InputNumber, Modal, Steps, UploadProps } from "antd";
+import {Button, Card, Checkbox, Form, Input, InputNumber, Modal, Steps, Upload, UploadProps} from "antd";
 import { EditOutlined, DeleteOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons';
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import TextArea from "antd/es/input/TextArea";
-import Dragger from "antd/es/upload/Dragger";
+import {useEffect, useState} from "react";
+import {UploadFile} from "antd/es/upload/interface";
+import {add} from "../../services/present";
+import {getByCat} from "../../services/product";
 
+const { Meta } = Card;
+const { Item } = Form;
+const { TextArea } = Input;
+const { Dragger } = Upload;
+
+interface PresentCard {
+    _id: string,
+    name: string,
+    brief: string,
+    price: number,
+    description: string,
+    compound: string[],
+    show: boolean,
+}
 
 const Present = () => {
 
-    const { id } = useParams();
     const [current, setCurrent] = useState(0);
     const [presentId, setPresentId] = useState("");
+    const [products, setProducts] = useState<PresentCard[]>([]);
+    const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [fileList, setFileList] = useState<UploadFile[]>([]);
+    const { id } = useParams();
     const [form] = Form.useForm();
-    const { Item } = Form;
+    const [formVar] = Form.useForm();
+    const [editForm] = Form.useForm();
+
+    useEffect(() => {
+        if (id !== null) {
+            getByCat(id).then(res => {
+                setProducts(res);
+            });
+        }
+    }, [id]);
 
     const firstStep = () => {
         return (
@@ -53,7 +81,7 @@ const Present = () => {
                 >
                     <TextArea
                         rows={6}
-                        placeholder={"Вводите каждый ингридиент с новой строки"}
+                        placeholder={"Вводите каждую позицию с новой строки"}
                     />
                 </Item>
                 <Item
@@ -73,7 +101,7 @@ const Present = () => {
         const props: UploadProps = {
             name: 'photos',
             multiple: true,
-            action: `https://kedrdom27.ru/present/uploadPhoto/${presentId}`,
+            action: `http://localhost:5000/present/uploadPhoto/${presentId}`,
             listType: "picture",
             className: "upload-list-inline"
         };
@@ -127,10 +155,14 @@ const Present = () => {
                 onOk={() => {
                     if (current === 0) {
                         form.validateFields()
-                            .then(async (values) => { })
-                            .then(() => {
-                                setPresentId("");
-                                setCurrent(1);
+                            .then(async (values) => {
+                                add({
+                                    ...values,
+                                    categoryId: id
+                                }).then((res) => {
+                                    setCurrent(1);
+                                    setPresentId(res);
+                                });
                             });
                     }
 
