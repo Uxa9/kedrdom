@@ -6,12 +6,14 @@ import {Category} from "../category/schemas/category.schema";
 import {EditCategoryDto} from "../category/dto/edit-category.dto";
 import { FilesService, FileType } from '../files/files.service';
 import { CreatePresentDto } from './dto/create-present.dto';
+import { CategoryService } from '../category/category.service';
 
 @Injectable()
 export class PresentService {
     constructor(
         @InjectModel(Present.name) private presentModel: Model<PresentDocument>,
-        private fileService : FilesService
+        private fileService : FilesService,
+        private categoryService: CategoryService,
     ) {}
 
     async create(dto: CreatePresentDto): Promise<Present> {
@@ -37,7 +39,7 @@ export class PresentService {
         return fileNames[0];
     }
 
-    async getAll(): Promise<Category[]> {
+    async getAll(page: number = 0): Promise<Present[]> {
         try {
             return this.presentModel.find();
         }
@@ -48,7 +50,7 @@ export class PresentService {
         }
     }
 
-    async getById(id: ObjectId): Promise<Category> {
+    async getById(id: ObjectId): Promise<Present> {
         try {
             return this.presentModel.findById(id);
         }
@@ -57,6 +59,25 @@ export class PresentService {
                 status: "not found"
             }, HttpStatus.NOT_FOUND);
         }
+    }
+
+    async getByIdByPage(category: ObjectId, page: number = 0): Promise<Present[]> {
+
+        const cats = (await this.categoryService.getAllNestedById(category)).map(cat => cat._id);
+        
+        if (page !== 0) return this.presentModel.find({categoryId: { $in: cats }}).limit(9).skip(--page * 9);
+        else return this.presentModel.find({categoryId: { $in: cats }});
+
+    }
+
+    async getAllProducts(category: ObjectId): Promise<Present[]> {
+
+        const cats = await this.categoryService.getAllNestedById(category);
+
+        const catsName = cats.map(cat => cat._id);
+        
+
+        return this.presentModel.find({categoryId: { $in: catsName }});
     }
 
     async update(dto: EditCategoryDto): Promise<any> {
@@ -83,5 +104,17 @@ export class PresentService {
                 status: "error"
             }, HttpStatus.BAD_GATEWAY);
         }
+    }
+
+    async getPagesAmount(query: any): Promise<Number> {
+
+        if (query.categoryId !== undefined) {
+            const categories = (await this.categoryService.getAllNestedById(query.categoryId)).map(item => item._id.toString());
+            
+            return Math.ceil((await this.presentModel.find({ categoryId : { $in : categories }}).select('_id')).length / 9);
+        
+        } else {
+            return Math.ceil((await this.presentModel.find().select('_id')).length / 9);
+        }        
     }
 }

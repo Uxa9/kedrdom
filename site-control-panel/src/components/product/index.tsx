@@ -71,14 +71,14 @@ const Products = () => {
         }
     }, [current]);
 
-    useEffect(() => {        
+    useEffect(() => {
         if (productId !== "") {
             getProduct(productId)
                 .then(res => {
                     setProductVars(res.variants);
                 });
         }
-    }, [productId])
+    }, [productId]);
 
     const firstStep = () => {
         return (
@@ -427,77 +427,77 @@ const Products = () => {
                             gridTemplateColumns: "repeat(auto-fit, minmax(332px, 1fr))"
                         }}
                     >
-                    {
-                        products.map(product =>
-                            <Card
-                                hoverable
-                                style={{ width: 300, marginBottom: "16px" }}
-                                cover={
-                                    <img
-                                        alt="example"
-                                        src={`https://kedrdom27.ru:5000/${product.photos[0]}` || "https://kedrdom27.ru:5000/product/test.jpg"}
-                                    />
-                                }
-                                actions={[
-                                    <Button
-                                        type="link"
-                                        onClick={() => {
-                                            setShowEditModal(true);
-                                            setProductId(product._id);
-                                            editForm.setFieldsValue({
-                                                ...product,
-                                                proteins: product.pfc.proteins,
-                                                fats: product.pfc.fats,
-                                                carbohydrates: product.pfc.carbohydrates,
-                                            });
-                                            setFileList(product.photos.map((item, index): UploadFile => {
-                                                return {
-                                                    uid: index.toString(),
-                                                    name: item,
-                                                    status: 'done',
-                                                    url: `https://kedrdom27.ru:5000/${product.photos[index]}` || "https://kedrdom27.ru:5000/product/test.jpg"
-                                                }
-                                            }))
-                                        }}
-                                    >
-                                        <EditOutlined
-                                            key="edit"
+                        {
+                            products.map(product =>
+                                <Card
+                                    hoverable
+                                    style={{ width: 300, marginBottom: "16px" }}
+                                    cover={
+                                        <img
+                                            alt="example"
+                                            src={`https://kedrdom27.ru:5000/${product.photos[0]}` || "https://kedrdom27.ru:5000/product/test.jpg"}
                                         />
-                                    </Button>
-                                    ,
-                                    <Popconfirm
-                                        title={"Вы точно хотите удалить выбранный товар?"}
-                                        onConfirm={() => {
-                                            deleteProduct(product._id)
-                                                .then(() => getByCat(id).then(res => {
-                                                    setProducts(res);
-                                                }));
-                                        }}
-                                        cancelText={"Нет"}
-                                        okText={"Да"}
-                                        placement={"topRight"}
-                                    >
+                                    }
+                                    actions={[
                                         <Button
-                                            danger
                                             type="link"
+                                            onClick={() => {
+                                                setShowEditModal(true);
+                                                setProductId(product._id);
+                                                editForm.setFieldsValue({
+                                                    ...product,
+                                                    proteins: product.pfc.proteins,
+                                                    fats: product.pfc.fats,
+                                                    carbohydrates: product.pfc.carbohydrates,
+                                                });
+                                                setFileList(product.photos.map((item, index): UploadFile => {
+                                                    return {
+                                                        uid: index.toString(),
+                                                        name: item,
+                                                        status: 'done',
+                                                        url: `https://kedrdom27.ru:5000/${product.photos[index]}` || "https://kedrdom27.ru:5000/product/test.jpg"
+                                                    }
+                                                }))
+                                            }}
                                         >
-                                            <DeleteOutlined />
+                                            <EditOutlined
+                                                key="edit"
+                                            />
                                         </Button>
-                                    </Popconfirm>
-                                ]}
-                            >
-                                <Meta
-                                    title={product.name}
-                                />
-                            </Card>
-                        )
-                    }
-                </div>
+                                        ,
+                                        <Popconfirm
+                                            title={"Вы точно хотите удалить выбранный товар?"}
+                                            onConfirm={() => {
+                                                deleteProduct(product._id)
+                                                    .then(() => getByCat(id).then(res => {
+                                                        setProducts(res);
+                                                    }));
+                                            }}
+                                            cancelText={"Нет"}
+                                            okText={"Да"}
+                                            placement={"topRight"}
+                                        >
+                                            <Button
+                                                danger
+                                                type="link"
+                                            >
+                                                <DeleteOutlined />
+                                            </Button>
+                                        </Popconfirm>
+                                    ]}
+                                >
+                                    <Meta
+                                        title={product.name}
+                                    />
+                                </Card>
+                            )
+                        }
+                    </div>
                 </> :
-    <>
-        Выберите категорию чтобы продолжить
-    </>
-}
+                <>
+                    Выберите категорию чтобы продолжить
+                </>
+            }
             <Modal
                 open={showModal}
                 onCancel={() => {
