@@ -19,7 +19,6 @@ export class PresentService {
     async create(dto: CreatePresentDto): Promise<Present> {
         try {
             const present = await this.presentModel.create({ ...dto, photos: [] });
-            console.log('aboba')
             return present._id;
         }
         catch(e) {
