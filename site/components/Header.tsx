@@ -1,5 +1,5 @@
 import styles from "../styles/Header.module.scss";
-import logo from "../public/logo.png";
+import logo from "../public/logo.svg";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";

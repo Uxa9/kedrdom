@@ -113,6 +113,19 @@ const Index = () => {
                                     </a>
                                 </div>
                             </div>
+                            <div>
+                                <p
+                                    className={textFont.className}
+                                >
+                                    <span>
+                                        Наш режим работы
+                                    </span>
+                                    <div>
+                                        Пн-Сб с 11 до 19 <br/>
+                                        Вс с 11 до 18
+                                    </div>
+                                </p>
+                            </div>
                             <Button
                                 onClick={() => router.push('/catalog?page=1')}
                                 text="Каталог"
