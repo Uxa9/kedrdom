@@ -44,6 +44,10 @@
     @include linkStyles();
 }
 
+.card-unavilable {
+    filter: brightness(1) grayscale(1);
+}
+
 @media screen and (max-width: 600px) {
     .card {
         height: 330px;

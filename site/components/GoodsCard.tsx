@@ -26,7 +26,7 @@ const GoodsCard = props => {
                setAvailable(true);
            }
        })
-    }, []);
+    }, [props.data._id]);
 
     return (
         <div

@@ -10,6 +10,7 @@ import { CreateVariantDto } from './dto/create-variant.dto';
 import { Variants, VariantsDocumnet } from './schemas/variants.schema';
 import { DeleteVariantDto } from './dto/delete-variant.dto';
 import { EditVariantDto } from './dto/edit-variant.dto';
+import {find} from "rxjs";
 
 @Injectable()
 export class ProductService {
@@ -28,16 +29,25 @@ export class ProductService {
     async getByIdByPage(category: ObjectId, page: number = 0): Promise<Product[]> {
 
         const cats = (await this.categoryService.getAllNestedById(category)).map(cat => cat._id);
-        
+        // console.log(--page * 9)
+        // console.log(await this.productModel.find({categoryId: { $in: cats }}, {_id: 1}));
+this.productModel.aggregate([
+    {$match: {categoryId: { $in: cats }}},
+    {$sort: { isNew: "desc" }},
+    {$skip: 1},
+    {$limit: 9}
+]);
+
+        this.productModel.find()
         if (page !== 0) return this.productModel.find({categoryId: { $in: cats }}).sort({isNew: "desc"}).limit(9).skip(--page * 9);
-        else return this.productModel.find({categoryId: { $in: cats }});
+        else return this.productModel.find({categoryId: { $in: cats }}).sort({isNew: "desc"});
 
     }
 
     async getAll(page: number = 0): Promise<Product[]> {
 
         if (page !== 0) return this.productModel.find().sort({isNew: "desc"}).limit(9).skip(--page * 9);
-        else return this.productModel.find();
+        else return this.productModel.find().sort({isNew: "desc"});
         
     }
 

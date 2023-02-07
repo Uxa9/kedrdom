@@ -65,7 +65,7 @@ const SideCatalogMenu = (props) => {
     }
 
     useEffect(() => {
-        axios.get("https://kedrdom27.ru:5000/category/").then(res => {
+        axios.get("http://localhost:5000/category/").then(res => {
             setCategories(res.data);            
         });
     }, []);
