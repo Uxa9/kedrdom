@@ -90,7 +90,9 @@ const Index = () => {
                         <div
                             className={styles["actions-wrapper"]}
                         >
-                            <div>
+                            <div
+                                className={styles["links-block"]}
+                            >
                                 <p
                                     className={textFont.className}
                                 >
@@ -113,17 +115,17 @@ const Index = () => {
                                     </a>
                                 </div>
                             </div>
-                            <div>
+                            <div
+                                className={`${textFont.className} ${styles['work-time-block']}`}
+                            >
+                                <p>
+                                    Наш режим работы
+                                </p>
                                 <p
-                                    className={textFont.className}
+                                    className={styles['work-time']}
                                 >
-                                    <span>
-                                        Наш режим работы
-                                    </span>
-                                    <div>
-                                        Пн-Сб с 11 до 19 <br/>
-                                        Вс с 11 до 18
-                                    </div>
+                                    Пн-Сб с 11 до 19 <br/>
+                                    Вс с 11 до 18
                                 </p>
                             </div>
                             <Button
@@ -377,6 +379,7 @@ const Index = () => {
                         onClick={() => swiperRef.current?.slideNext()}
                     />
                     <h2>
+                        <Link href={"/"} />
                         Каталог подарков
                     </h2>
                 </section>

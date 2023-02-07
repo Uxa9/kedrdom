@@ -41,6 +41,12 @@ export class Product {
 
     @Prop()
     categoryId: string;
+
+    @Prop()
+    isNew: boolean;
+
+    @Prop()
+    isPopular: boolean;
 }
 
-export const ProductShema = SchemaFactory.createForClass(Product);
+export const ProductSchema = SchemaFactory.createForClass(Product);

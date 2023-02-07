@@ -1,5 +1,5 @@
 import { Button, Card, Checkbox, Col, Divider, Form, Input, InputNumber, List, Modal, Popconfirm, Row, Select, Skeleton, Steps, Upload } from "antd";
-import { EditOutlined, DeleteOutlined, PlusOutlined, InboxOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined, InboxOutlined, FireOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { add, addVariant, deleteProduct, deleteVariant, getByCat, getProduct, updateProduct, updateVariant } from "../../services/product/";
@@ -27,6 +27,8 @@ interface ProductCard {
     storageCondition: string,
     variants: VariantCard[],
     show: boolean,
+    isNew: boolean,
+    isPopular: boolean
 }
 
 interface VariantCard {
@@ -95,7 +97,9 @@ const Products = () => {
                     photos: undefined,
                     expiredDate: "",
                     storageCondition: "",
-                    show: true
+                    show: true,
+                    isNew: true,
+                    isPopular: false
                 }}
                 layout={"vertical"}
             >
@@ -186,6 +190,25 @@ const Products = () => {
                 >
                     <Checkbox
                         defaultChecked={true}
+                    />
+                </Item>
+                <Item
+                    label="Новинка"
+                    valuePropName='checked'
+                    name="isNew"
+                >
+                    <Checkbox
+                        checked={true}
+                        defaultChecked={true}
+                    />
+                </Item>
+                <Item
+                    label="Популярно"
+                    valuePropName='checked'
+                    name="isPopular"
+                >
+                    <Checkbox
+                        defaultChecked={false}
                     />
                 </Item>
             </Form>
@@ -486,9 +509,35 @@ const Products = () => {
                                         </Popconfirm>
                                     ]}
                                 >
-                                    <Meta
-                                        title={product.name}
-                                    />
+                                    <Meta title={product.name}/>
+                                    <div
+                                        style={{
+                                            marginTop: "20px",
+                                            display: "flex"
+                                        }}
+                                    >
+                                        <Button
+                                            onClick={() => updateProduct({
+                                                _id : product._id,
+                                                isNew: !product.isNew
+                                            }).then(() => getByCat(id).then(res => {
+                                                setProducts(res);
+                                            }))}
+                                            shape={"circle"}
+                                            icon={<PlusCircleOutlined style={{ color: product.isNew ? "green" : "black" }} />}
+                                        />
+                                        <Button
+                                            onClick={() => updateProduct({
+                                                _id : product._id,
+                                                isPopular: !product.isPopular
+                                            }).then(() => getByCat(id).then(res => {
+                                                setProducts(res);
+                                            }))}
+                                            shape={"circle"}
+                                            icon={<FireOutlined style={{ color: product.isPopular ? "red" : "black" }} />}
+                                            style={{ marginLeft: "10px" }}
+                                        />
+                                    </div>
                                 </Card>
                             )
                         }
@@ -669,6 +718,24 @@ const Products = () => {
                     >
                         <Checkbox
                             defaultChecked={true}
+                        />
+                    </Item>
+                    <Item
+                        label="Новинка"
+                        valuePropName='checked'
+                        name="isNew"
+                    >
+                        <Checkbox
+                            defaultChecked={true}
+                        />
+                    </Item>
+                    <Item
+                        label="Популярно"
+                        valuePropName='checked'
+                        name="isPopular"
+                    >
+                        <Checkbox
+                            defaultChecked={false}
                         />
                     </Item>
                     <Divider />

@@ -29,14 +29,14 @@ export class ProductService {
 
         const cats = (await this.categoryService.getAllNestedById(category)).map(cat => cat._id);
         
-        if (page !== 0) return this.productModel.find({categoryId: { $in: cats }}).limit(9).skip(--page * 9);
+        if (page !== 0) return this.productModel.find({categoryId: { $in: cats }}).sort({isNew: "desc"}).limit(9).skip(--page * 9);
         else return this.productModel.find({categoryId: { $in: cats }});
 
     }
 
     async getAll(page: number = 0): Promise<Product[]> {
-        
-        if (page !== 0) return this.productModel.find().limit(9).skip(--page * 9);
+
+        if (page !== 0) return this.productModel.find().sort({isNew: "desc"}).limit(9).skip(--page * 9);
         else return this.productModel.find();
         
     }

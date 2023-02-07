@@ -13,11 +13,11 @@ const Pagination = () => {
     useEffect(() => {
 
         if (router.query.id === undefined) {
-            axios.get(`https://kedrdom27.ru:5000/product/pageAmount`).then(res => {
+            axios.get(`http://localhost:5000/product/pageAmount`).then(res => {
                 setPages(res.data);
             });
         } else {
-            axios.get(`https://kedrdom27.ru/product/pageAmount?categoryId=${router.query.id}`).then(res => {
+            axios.get(`http://localhost:5000/product/pageAmount?categoryId=${router.query.id}`).then(res => {
                 setPages(res.data);
             });
         }
