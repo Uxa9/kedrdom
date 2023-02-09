@@ -378,10 +378,11 @@ const Index = () => {
                         className={`${styles["swiper-arrow"]} ${styles["arrow-next"]}`}
                         onClick={() => swiperRef.current?.slideNext()}
                     />
-                    <h2>
-                        <Link href={"/"} />
-                        Каталог подарков
-                    </h2>
+                    <Button
+                        onClick={() => router.push('/presents?page=1')}
+                        text="Каталог подарков"
+                        className={styles['presents-button']}
+                    />
                 </section>
             </div>
         </MainLayout>

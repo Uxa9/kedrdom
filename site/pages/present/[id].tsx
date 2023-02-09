@@ -169,6 +169,11 @@ const Product = () => {
                         <p>
                             {product.brief}
                         </p>
+                        <p
+                            className={styles["present-price"]}
+                        >
+                            {product.price} рублей
+                        </p>
                     </div>
                 </main>
                 <div
