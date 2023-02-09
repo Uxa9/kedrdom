@@ -13,7 +13,8 @@ const textFont = Noto_Sans({
 
 const GoodsCard = props => {
     const router = useRouter();
-    const [available, setAvailable] = useState(false);
+    const [available, setAvailable] = useState(props.data.variants === undefined);
+    const goodType = (router.pathname === "/catalog" || router.pathname === "/catalog/[id]") ? "product" : "present";
 
     const findLowestPrice = (arr: any[]) => {
         if (arr.length === 0) return "-- "
@@ -21,7 +22,7 @@ const GoodsCard = props => {
     }
 
     useEffect(() => {
-       props.data.variants.map(item => {
+        goodType === "product" && props.data.variants.map(item => {
            if (item.available) {
                setAvailable(true);
            }
@@ -31,7 +32,10 @@ const GoodsCard = props => {
     return (
         <div
             className={`${styles["card"]} ${textFont.className} ${!available && styles['card-unavilable']}`}
-            onClick={() => router.push(`/product/${props.data._id}`)}
+            onClick={() => {
+                if (goodType === "product") router.push(`/product/${props.data._id}`)
+                if (goodType === "present") router.push(`/present/${props.data._id}`)
+            }}
             style={{
                 position: "relative"
             }}
@@ -87,9 +91,11 @@ const GoodsCard = props => {
                 <span>
                     {props.data.name}
                 </span>
-                <span>
-                    {findLowestPrice(props.data.variants)}₽
-                </span>
+                { goodType === "product" &&
+                    <span>
+                        {findLowestPrice(props.data.variants)}₽
+                    </span>
+                }
             </div>
         </div>
     )

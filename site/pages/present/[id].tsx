@@ -13,7 +13,8 @@ import 'swiper/css';
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Noto_Sans } from "@next/font/google";
-import ToggleButtonVariant from "../../components/ToggleButtonVariant";
+
+
 
 const textFont = Noto_Sans({
     weight: ['400'],
@@ -31,7 +32,7 @@ interface Product {
     name: string,
     brief: string,
     description: string,
-    compound: string[],
+    containment: string[],
     pfc: {
         proteins: number,
         fats: number,
@@ -51,10 +52,10 @@ const Product = () => {
     const swiperRef = useRef<SwiperCore>();
 
     const [cat, setCat] = useState("");
-    const [product, setProduct] = useState<Product>({
+    const [product, setProduct] = useState<any>({
         brief: "",
         categoryId: "",
-        compound: [],
+        containment: [],
         description: "",
         expiredDate: "",
         name: "",
@@ -68,7 +69,7 @@ const Product = () => {
     useEffect(() => {
         if (router.query.id === undefined) return;
 
-        axios.get(`http://localhost:5000/product/${router.query.id}`).then(res => {
+        axios.get(`http://localhost:5000/present/${router.query.id}`).then(res => {
             setProduct(res.data);
 
             axios.get(`http://localhost:5000/category/${res.data.categoryId}`).then(res => {
@@ -76,7 +77,8 @@ const Product = () => {
             });
         });
     }, [router.query.id]);
-    
+    console.log(product);
+
     return (
         <MainLayout>
             <section
@@ -85,10 +87,10 @@ const Product = () => {
                 <div
                     className={`${styles["breadscrumbs"]} ${textFont.className}`}
                 >
-                    <Link href={"../catalog"}>
-                        Каталог
+                    <Link href={"../presents"}>
+                        Подарки
                     </Link>
-                    <Link href={`../catalog/${product.categoryId}?page=1`}>
+                    <Link href={`../presents/${product.categoryId}?page=1`}>
                         {cat}
                     </Link>
                     <span>
@@ -116,7 +118,7 @@ const Product = () => {
                                     modules={[Autoplay, Navigation]}
                                     loop={true}
                                     slidesPerView={"auto"}
-                                        className="patau"
+                                    className="patau"
                                     spaceBetween={0}
                                     breakpoints={{
                                         940: {
@@ -126,7 +128,7 @@ const Product = () => {
                                         1024: {
                                             slidesPerView: 1,
                                             spaceBetween: 30,
-                                        },                                        
+                                        },
                                         1200: {
                                             slidesPerView: 2,
                                             spaceBetween: 30,
@@ -144,7 +146,7 @@ const Product = () => {
                                         return <SwiperSlide key={index}>
                                             <Image
                                                 src={`https://kedrdom27.ru:5000/${photoLink}`}
-                                                alt={"Фото товара"}
+                                                alt={"Фото подарка"}
                                                 width={320}
                                                 height={400}
                                             />
@@ -167,7 +169,6 @@ const Product = () => {
                         <p>
                             {product.brief}
                         </p>
-                        <ToggleButtonVariant variants={product.variants} />
                     </div>
                 </main>
                 <div
@@ -187,7 +188,7 @@ const Product = () => {
                         <ul
                             className={styles["compound"]}
                         >
-                            {product?.compound.toString().split('\n').map((item, index) => (
+                            {product?.containment.toString().split('\n').map((item, index) => (
                                 <li
                                     key={index}
                                 >
@@ -195,39 +196,6 @@ const Product = () => {
                                 </li>
                             ))}
                         </ul>
-                    </div>
-                    <div
-                        className={styles['pfc']}
-                    >
-                        <span>
-                            БЖУ/100гр:
-                        </span>
-                        <div>
-                            <span>
-                                Белки - {product.pfc.proteins} гр
-                            </span>
-                            <span>
-                                Жиры - {product.pfc.fats} гр
-                            </span>
-                            <span>
-                                Углеводы - {product.pfc.carbohydrates} гр
-                            </span>
-                        </div>
-                    </div>
-                    <div
-                        className={styles["storage-info"]}
-                    >
-                        <span>
-                            Срок годности: {product.expiredDate}
-                        </span>
-                        <div>
-                            <span>
-                                Условия хранения:
-                            </span>
-                            <span>
-                                {product.storageCondition}
-                            </span>
-                        </div>
                     </div>
                 </div>
             </section>

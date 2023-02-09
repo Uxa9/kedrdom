@@ -7,6 +7,7 @@ import { Noto_Sans } from "@next/font/google";
 
 import styles from "../styles/SideCatalogMenu.module.scss";
 import MenuComponent from "../components/MenuComponent";
+import MenuPresentComponent from "../components/MenuPresentComponent";
 
 const textFont = Noto_Sans({
     weight: ['400'],
@@ -23,7 +24,7 @@ interface Category {
 
 const SideCatalogMenu = (props) => {
 
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const router = useRouter();
 
     const renderMenu = (items: any[]) => {
@@ -56,7 +57,8 @@ const SideCatalogMenu = (props) => {
                     return ({
                         key: cat._id,
                         label: cat.name,
-                        children: children.length > 0 ? children : undefined
+                        children: children.length > 0 ? children : undefined,
+                        type: cat.type
                     })
                 });
 
@@ -66,7 +68,7 @@ const SideCatalogMenu = (props) => {
 
     useEffect(() => {
         axios.get("http://localhost:5000/category/").then(res => {
-            setCategories(res.data);            
+            setCategories(res.data);
         });
     }, []);
 
@@ -86,14 +88,20 @@ const SideCatalogMenu = (props) => {
                             Показать все
                         </Link>
                     </li>
-                </ul>
-                <ul>
-                    {parseMenuItems(categories).map(item => 
+                    {parseMenuItems(categories).filter(item => item.type !== "present").map(item =>
                         <MenuComponent
                             item={item}
                             onClick={props.clickHandler}
                         />
                     )}
+                    <MenuPresentComponent
+                        item={{
+                            label: "Подарки",
+                            children: parseMenuItems(categories).filter(item => item.type === "present"),
+                            key: ""
+                        }}
+                        onClick={props.clickHandler}
+                    />
                 </ul>
             </nav>
             {/* {parseMenuItems(categories)} */}

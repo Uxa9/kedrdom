@@ -28,13 +28,6 @@ const MenuComponent = (props) => {
             }
             {open && props.item.children &&
                 <ul>
-                    {props.item.children.map((item: any, index: any) => 
-                        <MenuComponent 
-                            item={item}
-                            onClick={props.onClick}
-                            key={index}
-                        />
-                    )}
                     <li>
                         <Link
                             href={`/catalog/${props.item.key}?page=1`}
@@ -43,6 +36,13 @@ const MenuComponent = (props) => {
                             Показать все
                         </Link>
                     </li>
+                    {props.item.children.map((item: any, index: any) => 
+                        <MenuComponent 
+                            item={item}
+                            onClick={props.onClick}
+                            key={index}
+                        />
+                    )}
                 </ul>
             }
     </li>

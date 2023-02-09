@@ -12,12 +12,14 @@ const Pagination = () => {
 
     useEffect(() => {
 
+        const goodType = (router.pathname === "/catalog" || router.pathname === "/catalog/[id]") ? "product" : "present"
+
         if (router.query.id === undefined) {
-            axios.get(`http://localhost:5000/product/pageAmount`).then(res => {
+            axios.get(`http://localhost:5000/${goodType}/pageAmount`).then(res => {
                 setPages(res.data);
             });
         } else {
-            axios.get(`http://localhost:5000/product/pageAmount?categoryId=${router.query.id}`).then(res => {
+            axios.get(`http://localhost:5000/${goodType}/pageAmount?categoryId=${router.query.id}`).then(res => {
                 setPages(res.data);
             });
         }

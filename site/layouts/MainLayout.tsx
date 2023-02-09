@@ -28,7 +28,11 @@ const MainLayout: React.FC<Props> = (props) => {
                 <main
                     className={styles["content-main-wrapper"]}
                 >
-                    {(router.route === "/catalog" || router.route === "/catalog/[id]") && 
+                    {(
+                        router.route === "/catalog" ||
+                        router.route === "/catalog/[id]" ||
+                        router.route === "/presents" ||
+                        router.route === "/presents/[id]") &&
                         <SideCatalogMenu 
                             clickHandler={() => setIsMenuOpen(false)}
                         />

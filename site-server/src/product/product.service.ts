@@ -29,24 +29,14 @@ export class ProductService {
     async getByIdByPage(category: ObjectId, page: number = 0): Promise<Product[]> {
 
         const cats = (await this.categoryService.getAllNestedById(category)).map(cat => cat._id);
-        // console.log(--page * 9)
-        // console.log(await this.productModel.find({categoryId: { $in: cats }}, {_id: 1}));
-this.productModel.aggregate([
-    {$match: {categoryId: { $in: cats }}},
-    {$sort: { isNew: "desc" }},
-    {$skip: 1},
-    {$limit: 9}
-]);
 
-        this.productModel.find()
-        if (page !== 0) return this.productModel.find({categoryId: { $in: cats }}).sort({isNew: "desc"}).limit(9).skip(--page * 9);
+        if (page !== 0) return this.productModel.find({categoryId: { $in: cats }}).sort({isNew: "desc", _id: 1}).skip(--page * 9).limit(9);
         else return this.productModel.find({categoryId: { $in: cats }}).sort({isNew: "desc"});
-
     }
 
     async getAll(page: number = 0): Promise<Product[]> {
 
-        if (page !== 0) return this.productModel.find().sort({isNew: "desc"}).limit(9).skip(--page * 9);
+        if (page !== 0) return this.productModel.find().sort({isNew: "desc", _id: 1}).limit(9).skip(--page * 9);
         else return this.productModel.find().sort({isNew: "desc"});
         
     }
