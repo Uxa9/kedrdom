@@ -44,6 +44,10 @@
     }
 }
 
+.variant-crossed {
+    text-decoration: line-through;
+}
+
 @media screen and (max-width: 830px) {
     .variant-price {
         margin: 30px 0;

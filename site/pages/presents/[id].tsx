@@ -11,12 +11,12 @@ import Pagination from "../../components/Pagination";
 
 export async function getServerSideProps(ctx) {
 
-    const catName = await axios.get(`http://localhost:5000/present/${ctx.query.id}`).then(res => {
+    const catName = await axios.get(`https://kedrdom27.ru:5000/present/${ctx.query.id}`).then(res => {
         console.log(res)
         return res.data;
     });
 
-    const presents = await axios.get(`http://localhost:5000/present/${ctx.query.id}/page=${ctx.query.page || 1}`).then(res => {
+    const presents = await axios.get(`https://kedrdom27.ru:5000/present/${ctx.query.id}/page=${ctx.query.page || 1}`).then(res => {
         return res.data;
     });
 

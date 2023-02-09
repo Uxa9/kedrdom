@@ -13,6 +13,7 @@ import 'swiper/css';
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Noto_Sans } from "@next/font/google";
+import Button from "../../components/Button";
 
 
 
@@ -69,10 +70,10 @@ const Product = () => {
     useEffect(() => {
         if (router.query.id === undefined) return;
 
-        axios.get(`http://localhost:5000/present/${router.query.id}`).then(res => {
+        axios.get(`https://kedrdom27.ru:5000/present/${router.query.id}`).then(res => {
             setProduct(res.data);
 
-            axios.get(`http://localhost:5000/category/${res.data.categoryId}`).then(res => {
+            axios.get(`https://kedrdom27.ru:5000/category/${res.data.categoryId}`).then(res => {
                 setCat(res.data.name);
             });
         });
@@ -174,6 +175,12 @@ const Product = () => {
                         >
                             {product.price} рублей
                         </p>
+                        <Link 
+                            href={`https://wa.me/79244029072?text=Здравствуйте,%20хочу%20заказать%20${product.name}.`}
+                            className={styles['order-button']}                      
+                        >
+                            Заказать
+                        </Link>
                     </div>
                 </main>
                 <div

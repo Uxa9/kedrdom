@@ -67,7 +67,7 @@ const SideCatalogMenu = (props) => {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:5000/category/").then(res => {
+        axios.get("https://kedrdom27.ru:5000/category/").then(res => {
             setCategories(res.data);
         });
     }, []);
@@ -78,6 +78,14 @@ const SideCatalogMenu = (props) => {
         >
             <nav>
                 <ul>
+                    <MenuPresentComponent
+                        item={{
+                            label: "Подарки",
+                            children: parseMenuItems(categories).filter(item => item.type === "present"),
+                            key: ""
+                        }}
+                        onClick={props.clickHandler}
+                    />
                     <li
                         onClick={props.clickHandler}
                     >
@@ -94,14 +102,6 @@ const SideCatalogMenu = (props) => {
                             onClick={props.clickHandler}
                         />
                     )}
-                    <MenuPresentComponent
-                        item={{
-                            label: "Подарки",
-                            children: parseMenuItems(categories).filter(item => item.type === "present"),
-                            key: ""
-                        }}
-                        onClick={props.clickHandler}
-                    />
                 </ul>
             </nav>
             {/* {parseMenuItems(categories)} */}

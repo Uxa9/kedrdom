@@ -55,10 +55,12 @@ const ToggleButtonVariant = (props) => {
                 className={styles["variants-wrapper"]}
             >
                 {varArr.map((variant, index) => {
+                    console.log(variant);
+                    
                     return (
                         <div
                             key={index}
-                            className={`${styles["variant"]} ${index === active && styles["active-variant"]}`}
+                            className={`${styles["variant"]} ${index === active && styles["active-variant"]} ${!variant.available && styles["variant-crossed"]}`}
                             onClick={() => {setActive(index)}}
                         >
                             {variant?.weight}гр

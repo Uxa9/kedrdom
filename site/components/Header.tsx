@@ -18,12 +18,18 @@ const Header = (props) => {
         <>
             <header
                 className={
-                    (router.pathname !== '/catalog/[id]' && router.pathname !== '/catalog')  ?
+                    (router.pathname !== '/catalog/[id]' && 
+                     router.pathname !== '/catalog' && 
+                     router.pathname !== '/presents' && 
+                     router.pathname !== '/presents/[id]' )  ?
                         styles.header :
                         `${styles.header} ${styles["enable-menu"]}`
                 }
             >
-                {(router.pathname === '/catalog/[id]' || router.pathname === '/catalog') &&
+                {(router.pathname === '/catalog/[id]' || 
+                  router.pathname === '/catalog' ||
+                  router.pathname === '/presents' || 
+                  router.pathname === '/presents/[id]') &&
                     <div
                         className={
                             !isOpen ?

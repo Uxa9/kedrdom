@@ -11,7 +11,7 @@ import Pagination from "../../components/Pagination";
 
 export async function getServerSideProps(ctx) {
 
-    const presents = await axios.get(`http://localhost:5000/present/page=${ctx.query.page || 1}`).then(res => {
+    const presents = await axios.get(`https://kedrdom27.ru:5000/present/page=${ctx.query.page || 1}`).then(res => {
         return res.data;
     });
 

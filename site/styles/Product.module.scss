@@ -183,7 +183,7 @@
 }
 
 .present-price {
-    margin-top: 100px;
+    margin-top: 30px;
     color: $brown;
     font-size: 32px;
 }
@@ -222,6 +222,24 @@
             max-width: 400px;
         }
     }
+}
+
+.order-button {
+    width: 100%;
+    display: block;
+    text-align: center;
+
+    padding: 7px 50px;
+
+    margin-bottom: 30px;
+    border: 1.3px solid $black;
+    font-weight: bold !important;
+
+    background-color: $bg-primary;
+
+    @include linkStyles();
+
+    transition: filter .5s;
 }
 
 @media screen and (max-width: 1200px) {

@@ -68,10 +68,10 @@ const Product = () => {
     useEffect(() => {
         if (router.query.id === undefined) return;
 
-        axios.get(`http://localhost:5000/product/${router.query.id}`).then(res => {
+        axios.get(`https://kedrdom27.ru:5000/product/${router.query.id}`).then(res => {
             setProduct(res.data);
 
-            axios.get(`http://localhost:5000/category/${res.data.categoryId}`).then(res => {
+            axios.get(`https://kedrdom27.ru:5000/category/${res.data.categoryId}`).then(res => {
                 setCat(res.data.name);
             });
         });
